@@ -294,7 +294,7 @@ public class RMSEntry implements Serializable, PLSBoat
     /**
      *
      * @return
-     * @see http://forum.velumng.com/viewtopic.php?f=8&t=7&p=7
+     * @see <a href="http://forum.velumng.com/viewtopic.php?f=8&t=7&p=7">ORC-Club: How PLD and PLT values are calculated</a>
      */
     public final double getPLTOffshoreCalculated()
     {
@@ -305,7 +305,7 @@ public class RMSEntry implements Serializable, PLSBoat
     /**
      *
      * @return
-     * @see http://forum.velumng.com/viewtopic.php?f=8&t=7&p=7
+     * @see <a href="http://forum.velumng.com/viewtopic.php?f=8&t=7&p=7">ORC-Club: How PLD and PLT values are calculated</a>
      */
     public final double getPLDOffshoreCalculated()
     {
@@ -315,7 +315,7 @@ public class RMSEntry implements Serializable, PLSBoat
     /**
      *
      * @return
-     * @see http://forum.velumng.com/viewtopic.php?f=8&t=7&p=7
+     * @see <a href="http://forum.velumng.com/viewtopic.php?f=8&t=7&p=7">ORC-Club: How PLD and PLT values are calculated</a>
      */
     public final double getPLTInshoreCalculated()
     {
@@ -326,7 +326,7 @@ public class RMSEntry implements Serializable, PLSBoat
     /**
      *
      * @return
-     * @see http://forum.velumng.com/viewtopic.php?f=8&t=7&p=7
+     * @see <a href="http://forum.velumng.com/viewtopic.php?f=8&t=7&p=7">ORC-Club: How PLD and PLT values are calculated</a>
      */
     public final double getPLDInshoreCalculated()
     {
