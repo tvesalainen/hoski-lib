@@ -36,7 +36,7 @@ public class UsersImpl extends DSUtilsImpl implements Repository, Users
     }
 
     @Override
-    public Entity retrieveCredentials(String email) throws EmailNotUniqueException
+    public Entity retrieveCredentials(Email email) throws EmailNotUniqueException
     {
         Entity user = retrieveUser(email);
         if (user == null)
@@ -55,7 +55,7 @@ public class UsersImpl extends DSUtilsImpl implements Repository, Users
     }
 
     @Override
-    public Entity retrieveUser(String email) throws EmailNotUniqueException
+    public Entity retrieveUser(Email email) throws EmailNotUniqueException
     {
         Query query = new Query(JASENET);
         query.addFilter("Email", Query.FilterOperator.EQUAL, email);
@@ -67,7 +67,7 @@ public class UsersImpl extends DSUtilsImpl implements Repository, Users
             Entity entity = iterator.next();
             if (iterator.hasNext())
             {
-                throw new EmailNotUniqueException(email);
+                throw new EmailNotUniqueException(email.getEmail());
             }
             return entity;
         }

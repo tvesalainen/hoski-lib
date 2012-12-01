@@ -16,6 +16,7 @@
 */
 package fi.hoski.datastore;
 
+import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Entity;
 import java.util.Map;
 
@@ -35,8 +36,8 @@ public interface Users
      */
     Map<String, Object> getUserData(Entity user);
 
-    Entity retrieveCredentials(String email) throws EmailNotUniqueException;
+    Entity retrieveCredentials(Email email) throws EmailNotUniqueException;
 
-    Entity retrieveUser(String email) throws EmailNotUniqueException;
+    Entity retrieveUser(Email email) throws EmailNotUniqueException;
     
 }
