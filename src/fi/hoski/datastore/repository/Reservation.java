@@ -17,9 +17,11 @@
 
 package fi.hoski.datastore.repository;
 
+import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.PhoneNumber;
 import com.google.appengine.api.datastore.Text;
 import fi.hoski.datastore.Repository;
 import fi.hoski.datastore.repository.Event.EventType;
@@ -73,8 +75,8 @@ public class Reservation extends DataObject implements Comparable<Reservation>
         BASE_MODEL.property(FIRSTNAME, String.class, false, true);
         BASE_MODEL.property(BOATNAME, String.class, false);
         BASE_MODEL.property(DOCKYARDPLACE, Long.class, false, true);
-        BASE_MODEL.property(MOBILEPHONE);
-        BASE_MODEL.property(EMAIL);
+        BASE_MODEL.property(MOBILEPHONE, PhoneNumber.class);
+        BASE_MODEL.property(EMAIL, Email.class);
         BASE_MODEL.property(NOTES, Text.class);
         BASE_MODEL.property(CREATOR);
         
@@ -85,8 +87,8 @@ public class Reservation extends DataObject implements Comparable<Reservation>
         LAUNCH_MODEL.property(BOATNAME, String.class, false);
         LAUNCH_MODEL.property(WEIGHT, Double.class, false, true);
         LAUNCH_MODEL.property(DOCKYARDPLACE, Long.class, false, true);
-        LAUNCH_MODEL.property(MOBILEPHONE);
-        LAUNCH_MODEL.property(EMAIL);
+        LAUNCH_MODEL.property(MOBILEPHONE, PhoneNumber.class);
+        LAUNCH_MODEL.property(EMAIL, Email.class);
         LAUNCH_MODEL.property(NOTES, Text.class);
         LAUNCH_MODEL.property(CREATOR);
         
@@ -98,8 +100,8 @@ public class Reservation extends DataObject implements Comparable<Reservation>
         LIFT_MODEL.property(WEIGHT, Double.class, false, true);
         LIFT_MODEL.property(LENGTH, Double.class, false, true);
         LIFT_MODEL.property(DOCKYARDPLACE, Long.class, false, true);
-        LIFT_MODEL.property(MOBILEPHONE);
-        LIFT_MODEL.property(EMAIL);
+        LIFT_MODEL.property(MOBILEPHONE, PhoneNumber.class);
+        LIFT_MODEL.property(EMAIL, Email.class);
         LIFT_MODEL.property(NOTES, Text.class);
         LIFT_MODEL.property(CREATOR);
         
@@ -109,8 +111,8 @@ public class Reservation extends DataObject implements Comparable<Reservation>
         INSPECTION_MODEL.property(LASTNAME, String.class, false, true);
         INSPECTION_MODEL.property(FIRSTNAME, String.class, false, true);
         INSPECTION_MODEL.property(BOATNAME, String.class, false);
-        INSPECTION_MODEL.property(MOBILEPHONE);
-        INSPECTION_MODEL.property(EMAIL);
+        INSPECTION_MODEL.property(MOBILEPHONE, PhoneNumber.class);
+        INSPECTION_MODEL.property(EMAIL, Email.class);
         INSPECTION_MODEL.property(BOATTYPE, String.class, false, true);
         INSPECTION_MODEL.property(DOCK);
         INSPECTION_MODEL.property(DOCKNUMBER, Long.class);
@@ -128,8 +130,8 @@ public class Reservation extends DataObject implements Comparable<Reservation>
         HULL_INSPECTION_MODEL.property(FIRSTNAME, String.class, false, true);
         HULL_INSPECTION_MODEL.property(BOATNAME, String.class, false);
         HULL_INSPECTION_MODEL.property(DOCKYARDPLACE, Long.class, false, true);
-        HULL_INSPECTION_MODEL.property(MOBILEPHONE);
-        HULL_INSPECTION_MODEL.property(EMAIL);
+        HULL_INSPECTION_MODEL.property(MOBILEPHONE, PhoneNumber.class);
+        HULL_INSPECTION_MODEL.property(EMAIL, Email.class);
         HULL_INSPECTION_MODEL.property(BOATTYPE, String.class, false, true);
         HULL_INSPECTION_MODEL.property(NOTES, Text.class);
         HULL_INSPECTION_MODEL.property(INSPECTOR, Long.class);

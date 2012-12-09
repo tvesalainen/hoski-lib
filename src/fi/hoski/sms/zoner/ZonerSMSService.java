@@ -58,11 +58,14 @@ public class ZonerSMSService implements SMSService
     private static final String URL_STRING = " https://sms.zoner.fi/sms.php";
     private EnumMap<Field,String> fieldMap = new EnumMap<Field,String>(Field.class);
 
-    private DatastoreService datastore;
+    public ZonerSMSService(String username, String password)
+    {
+        set(Field.USERNAME, username);
+        set(Field.PASSWORD, password);
+    }
 
     public ZonerSMSService(DatastoreService datastore)
     {
-        this.datastore = datastore;
         Key key = KeyFactory.createKey(Repository.MESSAGES, Messages.NAME);
         Entity entity;
         try
@@ -83,6 +86,8 @@ public class ZonerSMSService implements SMSService
     }
     private String getFrom()
     {
+        return "12345"; // sonera bug
+        /*
         UserService userService = UserServiceFactory.getUserService();
         User user = userService.getCurrentUser();
         String email = user.getEmail();
@@ -91,6 +96,7 @@ public class ZonerSMSService implements SMSService
             email = email.substring(0, 11);
         }
         return email;
+        */
     }
     @Override
     public SMSStatus send(String numberTo, String message) throws IOException, SMSException
@@ -150,7 +156,7 @@ public class ZonerSMSService implements SMSService
     private String sendTo(String numberFrom, String numberTo, String message) throws IOException, SMSException
     {
         message = message.replace('€', (char)0x80);
-        set(Field.NUMBERFROM, "12345"); // sonera bug?
+        set(Field.NUMBERFROM, numberFrom);
         set(Field.NUMBERTO, numberTo);
         set(Field.MESSAGE, message);
         set(Field.DR, "1");

@@ -166,9 +166,10 @@ public class EnhancedPreparedQuery implements PreparedQuery
                 throw new IllegalArgumentException("null");
             }
             v = ConvertUtil.convertTo(v, ev.getClass());
-            Comparable<Object> comp = (Comparable<Object>) ev;
+            Comparable comp = (Comparable) ev;
             if (ev.getClass().equals(v.getClass()))
             {
+                @SuppressWarnings("unchecked")
                 int compRes = comp.compareTo(v);
                 switch (fp.getOperator())
                 {

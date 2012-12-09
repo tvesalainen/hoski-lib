@@ -175,7 +175,7 @@ public class EventsImpl implements Events
             }
             entities.put(reservation);
             tr.commit();
-            String recipient = (String) reservation.get(Reservation.EMAIL);
+            Email recipient = (Email) reservation.get(Reservation.EMAIL);
             if (recipient != null)
             {
                 Key msgKey = KeyFactory.createKey(Messages.KIND, Messages.NAME);
@@ -190,7 +190,7 @@ public class EventsImpl implements Events
                 try
                 {
                     InternetAddress senderAddress = new InternetAddress(sender);
-                    InternetAddress recipientAddress = new InternetAddress(recipient);
+                    InternetAddress recipientAddress = new InternetAddress(recipient.getEmail());
                     mailService.sendMail(senderAddress, messageSubject, message, null, recipientAddress);
                 }
                 catch (AddressException ex)
