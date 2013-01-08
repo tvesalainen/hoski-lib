@@ -83,6 +83,14 @@ public class KeyInfo
         {
             label = repositoryBundle.getString(key.getKind()) + " " + key.getId();
         }
+        if (Attachment.KIND.equals(key.getKind()))
+        {
+            Entity attachment = entities.get(key);
+            label = (String) attachment.getProperty(Attachment.TITLE);
+            Link link = (Link) attachment.getProperty(Attachment.URL);
+            menuLink = "<a href=\""+link.getValue()+"\">"+label+"</a>";
+            editLink = menuLink;
+        }
         if (Repository.RACESERIES.equals(key.getKind()))
         {
             Entity rsEntity = entities.get(key);
