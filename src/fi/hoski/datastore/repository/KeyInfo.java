@@ -98,12 +98,7 @@ public class KeyInfo
             String event = (String) raceSeries.get(RaceSeries.EVENT);
             Day eventDate = (Day) raceSeries.get(RaceSeries.EVENTDATE);
             Day closingDate = (Day) raceSeries.get(RaceSeries.CLOSINGDATE);
-            boolean closing = false;
-            if (closingDate != null)
-            {
-                Day now = new Day();
-                closing = now.after(closingDate);
-            }
+            boolean closed = closed(closingDate);
             Day to = (Day) raceSeries.get(RaceSeries.TO);
             String eventDateString = null;
             if (eventDate.equals(to))
@@ -115,7 +110,7 @@ public class KeyInfo
                 eventDateString = eventDate.toString() + "&ndash;" + to.toString();
             }
             String format = null;
-            if (closing)
+            if (closed)
             {
                 format = repositoryBundle.getString("RaceSeriesClosing");
             }
@@ -133,12 +128,7 @@ public class KeyInfo
             String fleet = (String) raceFleet.get(RaceFleet.FLEET);
             Day eventDate = (Day) raceFleet.get(RaceFleet.EVENTDATE);
             Day closingDate = (Day) raceFleet.get(RaceFleet.CLOSINGDATE);
-            boolean closed = false;
-            if (closingDate != null)
-            {
-                Day now = new Day();
-                closed = now.after(closingDate);
-            }
+            boolean closed = closed(closingDate);
             Time time = (Time) raceFleet.get(RaceFleet.STARTTIME);
             Boolean ranking = (Boolean) raceFleet.get(RaceFleet.RANKING);
             String format = null;
@@ -209,6 +199,18 @@ public class KeyInfo
         }
     }
 
+    private boolean closed(Day closingDay)
+    {
+        if (closingDay != null)
+        {
+            Day now = new Day();
+            if (now.getYear() == closingDay.getYear())
+            {
+                return now.after(closingDay);
+            }
+        }
+        return false;
+    }
     public Map<String, Object> getMap() throws EntityNotFoundException
     {
         Map<String, Object> map = new HashMap<String, Object>();
