@@ -83,6 +83,7 @@ public class RacesImpl implements Races
     {
         List<RaceSeries> list = new ArrayList<RaceSeries>();
         Query query = new Query(RaceSeries.KIND);
+        query.setAncestor(entities.getYearKey());
         query.addSort(RaceSeries.EVENTDATE);
         PreparedQuery prepared = datastore.prepare(query);
         for (Entity entity : prepared.asIterable())
