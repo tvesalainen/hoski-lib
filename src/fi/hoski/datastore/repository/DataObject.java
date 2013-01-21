@@ -302,7 +302,11 @@ public class DataObject implements Cloneable
     {
         for (String property : model.propertyList)
         {
-            if (model.mandatorySet.contains(property) && data.get(property) == null)
+            if (
+                    model.mandatorySet.contains(property) && 
+                    model.defaultMap.get(property) == null &&
+                data.get(property) == null
+                    )
             {
                 return property;
             }
@@ -314,7 +318,11 @@ public class DataObject implements Cloneable
     {
         for (String property : properties)
         {
-            if (model.mandatorySet.contains(property) && data.get(property) == null)
+            if (
+                    model.mandatorySet.contains(property) && 
+                    model.defaultMap.get(property) == null &&
+                data.get(property) == null
+                    )
             {
                 return property;
             }
