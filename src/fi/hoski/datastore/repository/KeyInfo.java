@@ -100,8 +100,12 @@ public class KeyInfo
             Day closingDate = (Day) raceSeries.get(RaceSeries.CLOSINGDATE);
             boolean closed = closed(closingDate);
             Day to = (Day) raceSeries.get(RaceSeries.TO);
+            if (to == null)
+            {
+                to = eventDate;
+            }
             String eventDateString = null;
-            if (to == null || eventDate.equals(to))
+            if (eventDate.equals(to))
             {
                 eventDateString = eventDate.toString();
             }
@@ -262,6 +266,10 @@ public class KeyInfo
                 closed = now.after(closingDate);
             }
             Day to = (Day) raceSeries.get(RaceSeries.TO);
+            if (to == null)
+            {
+                to = eventDate;
+            }
             String eventDateString = null;
             if (eventDate.equals(to))
             {
