@@ -196,7 +196,7 @@ public class Time
     {
         try
         {
-            Time t1 = new Time();
+            Time t1 = new Time("00:00");
             Time t2 = new Time(t1.toString());
             if (!t1.equals(t2))
             {
