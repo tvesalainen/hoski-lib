@@ -76,7 +76,7 @@ public class ZonerSMSService implements SMSService
         }
         catch (EntityNotFoundException ex)
         {
-            Logger.getLogger(ZonerSMSService.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IllegalArgumentException(ex);
         }
     }
     
