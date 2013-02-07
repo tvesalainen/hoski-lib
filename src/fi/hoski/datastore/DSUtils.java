@@ -85,6 +85,8 @@ public interface DSUtils
     
     void delete(DataObject dataObject);
     
+    void deleteWithChilds(DataObject dataObject);
+    
     void delete(List<? extends DataObject> dataObjectList);
     
     List<Entity> convert(List<? extends DataObject> dataObjectList);

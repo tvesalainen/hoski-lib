@@ -360,6 +360,18 @@ public class DSUtilsImpl implements DSUtils
     }
 
     @Override
+    public void deleteWithChilds(DataObject dataObject)
+    {
+        Key key = dataObject.getEntity().getKey();
+        datastore.delete(key);
+        List<Entity> childs = getChilds(key);
+        for (Entity e : childs)
+        {
+            datastore.delete(e.getKey());
+        }
+    }
+
+    @Override
     public void delete(List<? extends DataObject> dataObjectList)
     {
         List<Key> list = new ArrayList<Key>();

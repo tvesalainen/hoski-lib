@@ -79,6 +79,11 @@ public class RacesImpl implements Races
     }
 
     @Override
+    public void removeRace(RaceSeries raceSeries)
+    {
+        entities.deleteWithChilds(raceSeries);
+    }
+    @Override
     public List<RaceSeries> getRaces() throws EntityNotFoundException
     {
         List<RaceSeries> list = new ArrayList<RaceSeries>();
@@ -217,4 +222,5 @@ public class RacesImpl implements Races
         Entity entity = references.getEntityFor(reference);
         return (RaceEntry) entities.newInstance(entity);
     }
+
 }

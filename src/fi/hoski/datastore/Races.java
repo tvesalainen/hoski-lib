@@ -33,6 +33,8 @@ public interface Races
     
     void putRace(RaceSeries raceSeries, List<RaceFleet> classList);
     
+    void removeRace(RaceSeries raceSeries);
+    
     List<RaceSeries> getRaces() throws EntityNotFoundException;
     
     List<RaceFleet> getFleets(RaceSeries raceSeries) throws EntityNotFoundException;
