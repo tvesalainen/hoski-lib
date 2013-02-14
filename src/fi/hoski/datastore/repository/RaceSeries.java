@@ -54,7 +54,7 @@ public class RaceSeries extends DataObject implements Reservable
         MODEL.property(RACE_AREA, String.class);
         MODEL.property(NOTES, Text.class);
         MODEL.property(SAILWAVEFILE, Blob.class);
-        MODEL.property(CLUBDISCOUNT, Boolean.class, false, true, true);
+        MODEL.property(CLUBDISCOUNT, Boolean.class, false, true, false);
         MODEL.property(SPONSORSTYLE);
         MODEL.property(PAGE);   // entry page if not null
     }
