@@ -40,6 +40,7 @@ public class RaceSeries extends DataObject implements Reservable
     public static final String CLUBDISCOUNT = "ClubDiscount";
     public static final String SPONSORSTYLE = "SponsorStyle";
     public static final String PAGE ="Page";
+    public static final String CLOSINGDATE2 ="ClosingDate2";
     
     public static final DataObjectModel MODEL = new DataObjectModel(KIND);
     
@@ -50,6 +51,7 @@ public class RaceSeries extends DataObject implements Reservable
         MODEL.property(EVENTDATE, Day.class, true, true);
         MODEL.property(TO, Day.class);
         MODEL.property(CLOSINGDATE, Day.class, true, true);
+        MODEL.property(CLOSINGDATE2, Day.class);
         MODEL.property(STARTTIME, Time.class, false, false);
         MODEL.property(RACE_AREA, String.class);
         MODEL.property(NOTES, Text.class);

@@ -307,11 +307,16 @@ public class KeyInfo
             String fleet = (String) raceFleet.get(RaceFleet.FLEET);
             Day eventDate = (Day) raceFleet.get(RaceFleet.EVENTDATE);
             Day closingDate = (Day) raceFleet.get(RaceFleet.CLOSINGDATE);
+            Day closingDate2 = (Day) raceFleet.get(RaceFleet.CLOSINGDATE2);
+            if (closingDate2 == null)
+            {
+                closingDate2 = closingDate;
+            }
             boolean closed = false;
-            if (closingDate != null)
+            if (closingDate2 != null)
             {
                 Day now = new Day();
-                closed = now.after(closingDate);
+                closed = now.after(closingDate2);
                 map.put(prefix + "isEventClosed", closed);
             }
             Time time = (Time) raceFleet.get(RaceFleet.STARTTIME);

@@ -87,4 +87,9 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="-post-jar">
+        <copy todir="../HoskiWebapp/web/WEB-INF/lib">
+            <fileset dir="dist"/>
+        </copy>
+    </target>
 </project>

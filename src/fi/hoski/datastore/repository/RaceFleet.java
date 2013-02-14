@@ -38,6 +38,7 @@ public class RaceFleet extends DataObject implements Reservable
     public static final String STARTTIME = "StartTime";
     public static final String FEE ="Fee";
     public static final String FEE2 ="Fee2";
+    public static final String CLOSINGDATE2 ="ClosingDate2";
     public static final String RANKING ="Ranking";
     
     public static final DataObjectModel MODEL = new DataObjectModel(KIND);
@@ -49,6 +50,7 @@ public class RaceFleet extends DataObject implements Reservable
         MODEL.property(EVENTDATE, Day.class, true);
         MODEL.property(STARTTIME, Time.class, false, false);
         MODEL.property(CLOSINGDATE, Day.class, true);
+        MODEL.property(CLOSINGDATE2, Day.class);
         MODEL.property(RATINGSYSTEM);
         MODEL.property(FEE, Double.class, false, false, 0.0);
         MODEL.property(FEE2, Double.class, false, false, 0.0);
