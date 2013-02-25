@@ -38,7 +38,7 @@ public class RaceFleet extends DataObject implements Reservable
     public static final String STARTTIME = "StartTime";
     public static final String FEE ="Fee";
     public static final String FEE2 ="Fee2";
-    public static final String CLOSINGDATE2 ="ClosingDate2";
+    public static final String CLOSINGDATE2 ="EventClosingDate2";
     public static final String RANKING ="Ranking";
     
     public static final DataObjectModel MODEL = new DataObjectModel(KIND);

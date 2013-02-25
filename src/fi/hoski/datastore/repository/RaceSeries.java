@@ -40,7 +40,7 @@ public class RaceSeries extends DataObject implements Reservable
     public static final String CLUBDISCOUNT = "ClubDiscount";
     public static final String SPONSORSTYLE = "SponsorStyle";
     public static final String PAGE ="Page";
-    public static final String CLOSINGDATE2 ="ClosingDate2";
+    public static final String CLOSINGDATE2 ="EventClosingDate2";
     
     public static final DataObjectModel MODEL = new DataObjectModel(KIND);
     
