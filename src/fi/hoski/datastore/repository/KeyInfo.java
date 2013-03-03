@@ -459,7 +459,8 @@ public class KeyInfo
                 {
                     if (value instanceof Double)
                     {
-                        entry.setValue(String.format("%.2f", value));
+                        Double d = (Double) value;
+                        entry.setValue(String.valueOf(d.intValue()));
                     }
                     else
                     {
