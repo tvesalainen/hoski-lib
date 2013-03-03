@@ -457,7 +457,14 @@ public class KeyInfo
                         !(value instanceof char[]) 
                         )
                 {
-                    entry.setValue(value.toString());
+                    if (value instanceof Double)
+                    {
+                        entry.setValue(String.format("%.2f", value));
+                    }
+                    else
+                    {
+                        entry.setValue(value.toString());
+                    }
                 }
             }
         }
