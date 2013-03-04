@@ -46,13 +46,15 @@ public class FormPoster
         connection.setRequestMethod("POST");
         String uid = UUID.randomUUID().toString();
         connection.setRequestProperty("Content-Type", "multipart/form-data; boundary="+uid);
-        PrintStream ps = new PrintStream(connection.getOutputStream());
+        PrintStream ps = new PrintStream(connection.getOutputStream(), false, "utf-8");
         for (String name : formData.keySet())
         {
             String value = formData.get(name);
             ps.append("--"+uid);
             ps.append(CRLF);
             ps.append("Content-Disposition: form-data; name=\""+name+"\"");
+            ps.append(CRLF);
+            ps.append("Content-Type: text/plain; charset=utf-8");
             ps.append(CRLF);
             ps.append(CRLF);
             ps.append(value);
