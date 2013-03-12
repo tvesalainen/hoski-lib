@@ -180,7 +180,7 @@ public class ZonerSMSService implements SMSService
         }
         catch (NumberFormatException ex)
         {
-            throw new SMSException(line, ex);
+            return 0;
         }
     }
 
