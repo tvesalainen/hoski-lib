@@ -245,13 +245,13 @@ public class PatrolShiftsImpl implements PatrolShifts
         
         Key memberKey = (Key) newPatrolShift.getProperty(Repository.JASENNO);
         Entity memberEntity = datastore.get(memberKey);
-        Email email = (Email) memberEntity.getProperty(Repository.EMAIL);
+        String email = (String) memberEntity.getProperty(Repository.EMAIL);
         InternetAddress senderAddress = new InternetAddress(sender);
-        InternetAddress internetAddress = new InternetAddress(email.getEmail());
+        InternetAddress internetAddress = new InternetAddress(email);
         mailService.sendMail(senderAddress, subject, message, null, internetAddress);
         log.log("send to="+internetAddress);
-        PhoneNumber phone = (PhoneNumber) memberEntity.getProperty(Repository.MOBILE);
-        SMSStatus sendStatus = smsService.send(sender, phone.getNumber(), message);
+        String phone = (String) memberEntity.getProperty(Repository.MOBILE);
+        SMSStatus sendStatus = smsService.send(sender, phone, message);
         log.log("send to="+phone);
         log.log("sms status="+sendStatus);
         return message;

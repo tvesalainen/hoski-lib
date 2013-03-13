@@ -52,6 +52,7 @@ public class EntityComparator implements Comparator<Entity>
             if (v1 != null && v2 != null)
             {
                 Comparable c1 = (Comparable) v1;
+                @SuppressWarnings("unchecked")
                 int comp = c1.compareTo(v2);
                 if (comp != 0)
                 {

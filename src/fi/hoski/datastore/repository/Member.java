@@ -17,9 +17,7 @@
 
 package fi.hoski.datastore.repository;
 
-import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.PhoneNumber;
 
 /**
  * @author Timo Vesalainen
@@ -34,8 +32,8 @@ public class Member extends DataObject
     public static final String OSOITE = "Osoite";		// String
     public static final String POSTINUMERO = "Postinumero";		// String
     public static final String POSTITOIMIPAIKKA = "Postitoimipaikka";		// String
-    public static final String MOBILE = "Mobile";		// PhoneNumber
-    public static final String EMAIL = "Email";		// Email
+    public static final String MOBILE = "Mobile";		// String
+    public static final String EMAIL = "Email";		// String
 
     public static final DataObjectModel MODEL = new DataObjectModel(KIND);
     
@@ -47,8 +45,8 @@ public class Member extends DataObject
         MODEL.property(OSOITE);
         MODEL.property(POSTINUMERO);
         MODEL.property(POSTITOIMIPAIKKA);
-        MODEL.property(MOBILE, PhoneNumber.class);
-        MODEL.property(EMAIL, Email.class);
+        MODEL.property(MOBILE, String.class);
+        MODEL.property(EMAIL, String.class);
     }
 
     public Member()
