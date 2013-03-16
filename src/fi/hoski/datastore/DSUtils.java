@@ -73,6 +73,8 @@ public interface DSUtils
     
     Key getYearKey();
     
+    void addYear(int year);
+    
     Entity createEntity(Map<String, String[]> parameters);
 
     Map<String, String[]> getMap(Entity entity);

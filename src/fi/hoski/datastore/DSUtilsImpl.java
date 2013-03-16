@@ -210,6 +210,21 @@ public class DSUtilsImpl implements DSUtils
     }
 
     @Override
+    public void addYear(int year)
+    {
+        Key yearKey = Keys.getYearKey(year);
+        try
+        {
+            datastore.get(yearKey);
+        }
+        catch (EntityNotFoundException ex)
+        {
+            Entity entity = new Entity(yearKey);
+            datastore.put(entity);
+        }
+    }
+
+    @Override
     public Key getYearKey()
     {
         Key yearKey = Keys.getYearKey(new Day());
