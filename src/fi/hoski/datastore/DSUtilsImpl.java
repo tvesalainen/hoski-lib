@@ -27,6 +27,8 @@ import fi.hoski.util.FormPoster;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Timo Vesalainen
@@ -142,6 +144,10 @@ public class DSUtilsImpl implements DSUtils
         {
             return new Title(entity);
         }
+        if (Year.KIND.equals(entity.getKind()))
+        {
+            return new Year(entity);
+        }
         throw new IllegalArgumentException("unknown entity "+entity);
     }
 
@@ -190,13 +196,33 @@ public class DSUtilsImpl implements DSUtils
     @Override
     public Key getRootKey()
     {
-        return Keys.getRootKey();
+        Key rootKey = Keys.getRootKey();
+        try
+        {
+            datastore.get(rootKey);
+        }
+        catch (EntityNotFoundException ex)
+        {
+            Entity entity = new Entity(rootKey);
+            datastore.put(entity);
+        }
+        return rootKey;
     }
 
     @Override
     public Key getYearKey()
     {
-        return Keys.getYearKey(new Day());
+        Key yearKey = Keys.getYearKey(new Day());
+        try
+        {
+            datastore.get(yearKey);
+        }
+        catch (EntityNotFoundException ex)
+        {
+            Entity entity = new Entity(yearKey);
+            datastore.put(entity);
+        }
+        return yearKey;
     }
 
     @Override
