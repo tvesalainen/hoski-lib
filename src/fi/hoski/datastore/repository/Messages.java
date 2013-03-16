@@ -61,6 +61,8 @@ public class Messages  extends DataObject
     public static final String ORCINFOURL = "ORCInfoURL";
     public static final String SMSUSERNAME = "smsUsername";
     public static final String SMSPASSWORD = "smsPassword";
+    
+    public static final String TEXT = "Text";
 
     public static final DataObjectModel MODEL = new DataObjectModel(KIND);
     
@@ -96,6 +98,10 @@ public class Messages  extends DataObject
         for (EventType eventType : EventType.values())
         {
             MODEL.property(eventType.name(), Text.class);
+        }
+        for (int ii=0;ii<10;ii++)
+        {
+            MODEL.property(TEXT+ii, Text.class);
         }
     }
 
