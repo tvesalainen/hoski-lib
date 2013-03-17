@@ -189,7 +189,7 @@ public class RacesImpl implements Races
                 tr.commit();
                 
                 Day date = (Day) raceFleet.get(RaceFleet.EVENTDATE);
-                Day due = (Day) raceFleet.get(RaceFleet.CLOSINGDATE);
+                Day due = new Day();
                 String bankAccount = entities.getMessage(Messages.RACEBANKACCOUNT);
                 String bic = entities.getMessage(Messages.RACEBIC);
                 return new BankingBarcode(
