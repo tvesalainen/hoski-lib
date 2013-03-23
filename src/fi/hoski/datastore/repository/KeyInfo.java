@@ -81,7 +81,7 @@ public class KeyInfo
         editLink = label;
         if (Repository.YEAR.equals(key.getKind()))
         {
-            label = repositoryBundle.getString(key.getKind()) + " " + key.getId();
+            label = /*repositoryBundle.getString(key.getKind()) + " " + */""+key.getId();
         }
         if (Attachment.KIND.equals(key.getKind()))
         {
@@ -245,7 +245,7 @@ public class KeyInfo
         }
         if (Repository.YEAR.equals(key.getKind()))
         {
-            lab = repositoryBundle.getString(key.getKind()) + " " + key.getId();
+            lab = /*repositoryBundle.getString(key.getKind()) + " " +*/""+ key.getId();
             map.put(prefix + "Year", key.getId());
         }
         if (Repository.RACESERIES.equals(key.getKind()))
