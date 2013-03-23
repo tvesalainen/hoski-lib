@@ -47,7 +47,15 @@ public class Year extends DataObject
     @Override
     public Key createKey()
     {
-        return Keys.getYearKey(new Day());
+        Entity entity = getEntity();
+        if (entity != null)
+        {
+            return entity.getKey();
+        }
+        else
+        {
+            return Keys.getYearKey(new Day());
+        }
     }
 
 }
