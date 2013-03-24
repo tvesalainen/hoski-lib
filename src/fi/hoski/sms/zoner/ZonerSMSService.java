@@ -21,6 +21,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import fi.hoski.datastore.Repository;
+import fi.hoski.datastore.repository.Keys;
 import fi.hoski.datastore.repository.Messages;
 import fi.hoski.sms.SMSService;
 import fi.hoski.sms.SMSException;
@@ -56,7 +57,7 @@ public class ZonerSMSService implements SMSService
     public static final int MAX2 = 306;
     public static final int MAX3 = 459;
     private static final String URL_STRING = " https://sms.zoner.fi/sms.php";
-    private EnumMap<Field,String> fieldMap = new EnumMap<Field,String>(Field.class);
+    private EnumMap<Field,String> fieldMap = new EnumMap<>(Field.class);
 
     public ZonerSMSService(String username, String password)
     {
@@ -66,7 +67,7 @@ public class ZonerSMSService implements SMSService
 
     public ZonerSMSService(DatastoreService datastore)
     {
-        Key key = KeyFactory.createKey(Repository.MESSAGES, Messages.NAME);
+        Key key = KeyFactory.createKey(Keys.getRootKey(), Repository.MESSAGES, Messages.NAME);
         Entity entity;
         try
         {

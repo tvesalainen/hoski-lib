@@ -439,7 +439,7 @@ public class PatrolShiftsImpl implements PatrolShifts
     @Override
     public void handleExpiredRequests(int margin) throws EntityNotFoundException
     {
-        Key msgKey = KeyFactory.createKey(Messages.KIND, Messages.NAME);
+        Key msgKey = KeyFactory.createKey(Keys.getRootKey(), Messages.KIND, Messages.NAME);
         Entity msgEntity = datastore.get(msgKey);
         String sender = (String) msgEntity.getProperty(Messages.PASSWORDFROMADDRESS);
         String messageSubject = (String) msgEntity.getProperty(Messages.PATROLSHIFTSWAPEXPIREDSUBJECT);

@@ -451,7 +451,8 @@ public class DSUtilsImpl implements DSUtils
     @Override
     public Messages getMessages()
     {
-        Key key = KeyFactory.createKey(Messages.KIND, Messages.NAME);
+        fixMessages();
+        Key key = KeyFactory.createKey(Keys.getRootKey(), Messages.KIND, Messages.NAME);
         Entity entity;
         try
         {
@@ -710,6 +711,22 @@ public class DSUtilsImpl implements DSUtils
             list.add((Title)newInstance(entity));
         }
         return list;
+    }
+
+    private void fixMessages()
+    {
+        Key key = KeyFactory.createKey(Messages.KIND, Messages.NAME);
+        try
+        {
+            Entity old = datastore.get(key);
+            key = KeyFactory.createKey(Keys.getRootKey(), Messages.KIND, Messages.NAME);
+            Entity ne = new Entity(key);
+            ne.setPropertiesFrom(old);
+            datastore.put(ne);
+        }
+        catch (EntityNotFoundException ex)
+        {
+        }
     }
 
 }

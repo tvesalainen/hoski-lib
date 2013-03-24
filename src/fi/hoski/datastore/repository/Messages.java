@@ -120,7 +120,7 @@ public class Messages  extends DataObject
     @Override
     public Key createKey()
     {
-        return KeyFactory.createKey(Repository.MESSAGES, NAME);
+        return KeyFactory.createKey(Keys.getRootKey(), Repository.MESSAGES, NAME);
     }
 
 }

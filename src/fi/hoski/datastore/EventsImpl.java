@@ -178,7 +178,7 @@ public class EventsImpl implements Events
             String recipient = (String) reservation.get(Reservation.EMAIL);
             if (recipient != null)
             {
-                Key msgKey = KeyFactory.createKey(Messages.KIND, Messages.NAME);
+                Key msgKey = KeyFactory.createKey(Keys.getRootKey(), Messages.KIND, Messages.NAME);
                 Entity msgEntity = datastore.get(msgKey);
                 String sender = (String) msgEntity.getProperty(Messages.PASSWORDFROMADDRESS);
                 String messageSubject = (String) msgEntity.getProperty(Messages.RESERVATIONMESSAGESUBJECT);

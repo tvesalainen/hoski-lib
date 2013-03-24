@@ -43,8 +43,8 @@ public class CachingDatastoreService implements DatastoreService
     private DatastoreService datastore;
     private Key root;
     private long version;
-    private Map<Query,PreparedQuery> preparedQueryMap = new WeakHashMap<Query,PreparedQuery>();
-    private Map<Key,Entity> entityMap = new WeakHashMap<Key,Entity>();
+    private Map<Query,PreparedQuery> preparedQueryMap = new WeakHashMap<>();
+    private Map<Key,Entity> entityMap = new WeakHashMap<>();
     private Map<Index, IndexState> indexes;
 
     public CachingDatastoreService(DatastoreService datastore, Key root)
