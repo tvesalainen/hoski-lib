@@ -68,11 +68,13 @@ public class DSUtilsImpl implements DSUtils
         return datastore.get(key);
     }
 
+    @Override
     public List<Entity> getChilds(Key parent)
     {
         return getChilds(parent, null);
     }
     
+    @Override
     public List<Entity> getChilds(Key parent, String kind)
     {
         Query query = new Query(kind);
@@ -435,13 +437,6 @@ public class DSUtilsImpl implements DSUtils
     }
 
     @Override
-    public Entity get(String kind, String name) throws EntityNotFoundException
-    {
-        Key key = KeyFactory.createKey(kind, name);
-        return datastore.get(key);
-    }
-
-    @Override
     public String getMessage(String key)
     {
         Messages messages = getMessages();
@@ -712,17 +707,20 @@ public class DSUtilsImpl implements DSUtils
         }
         return list;
     }
-
+    /**
+     * @deprecated Remove when ready!
+     */
     private void fixMessages()
     {
-        Key key = KeyFactory.createKey(Messages.KIND, Messages.NAME);
+        Key okey = KeyFactory.createKey(Messages.KIND, Messages.NAME);
         try
         {
-            Entity old = datastore.get(key);
-            key = KeyFactory.createKey(Keys.getRootKey(), Messages.KIND, Messages.NAME);
-            Entity ne = new Entity(key);
+            Entity old = datastore.get(okey);
+            Key nkey = KeyFactory.createKey(Keys.getRootKey(), Messages.KIND, Messages.NAME);
+            Entity ne = new Entity(nkey);
             ne.setPropertiesFrom(old);
             datastore.put(ne);
+            datastore.delete(okey);
         }
         catch (EntityNotFoundException ex)
         {

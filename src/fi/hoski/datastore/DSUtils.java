@@ -95,8 +95,6 @@ public interface DSUtils
     
     Entity get(Key key) throws EntityNotFoundException;
 
-    Entity get(String kind, String key) throws EntityNotFoundException;
-    
     void upload(DataObject attachTo, Attachment.Type type, String title, File... files) throws IOException;
     
     void removeAttachments(List<Attachment> attachments) throws IOException;
