@@ -446,7 +446,6 @@ public class DSUtilsImpl implements DSUtils
     @Override
     public Messages getMessages()
     {
-        fixMessages();
         Key key = KeyFactory.createKey(Keys.getRootKey(), Messages.KIND, Messages.NAME);
         Entity entity;
         try
@@ -698,7 +697,7 @@ public class DSUtilsImpl implements DSUtils
     @Override
     public List<Title> getTitles() throws EntityNotFoundException
     {
-        List<Title> list = new ArrayList<Title>();
+        List<Title> list = new ArrayList<>();
         Query query = new Query(Title.KIND);
         PreparedQuery prepared = datastore.prepare(query);
         for (Entity entity : prepared.asIterable())
@@ -706,25 +705,6 @@ public class DSUtilsImpl implements DSUtils
             list.add((Title)newInstance(entity));
         }
         return list;
-    }
-    /**
-     * @deprecated Remove when ready!
-     */
-    private void fixMessages()
-    {
-        Key okey = KeyFactory.createKey(Messages.KIND, Messages.NAME);
-        try
-        {
-            Entity old = datastore.get(okey);
-            Key nkey = KeyFactory.createKey(Keys.getRootKey(), Messages.KIND, Messages.NAME);
-            Entity ne = new Entity(nkey);
-            ne.setPropertiesFrom(old);
-            datastore.put(ne);
-            datastore.delete(okey);
-        }
-        catch (EntityNotFoundException ex)
-        {
-        }
     }
 
 }
