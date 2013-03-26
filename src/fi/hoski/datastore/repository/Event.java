@@ -30,7 +30,7 @@ import java.util.*;
 public class Event extends DataObject implements Comparable<Event>, Reservable
 {
 
-    public enum EventType {LAUNCH, LIFT, INSPECTION, HULL_INSPECTION};
+    public enum EventType {LAUNCH, LIFT, INSPECTION, HULL_INSPECTION, OTHER};
     
     public static final String KIND = Repository.EVENT;
     
@@ -69,6 +69,7 @@ public class Event extends DataObject implements Comparable<Event>, Reservable
         {
             case LAUNCH:
             case LIFT:
+            case OTHER:
                 return false;
             case INSPECTION:
             case HULL_INSPECTION:

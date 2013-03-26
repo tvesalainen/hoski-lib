@@ -198,6 +198,8 @@ public class Reservation extends DataObject implements Comparable<Reservation>
                 return INSPECTION_MODEL;
             case HULL_INSPECTION:
                 return HULL_INSPECTION_MODEL;
+            case OTHER:
+                return BASE_MODEL;
             default:
                 throw new IllegalArgumentException(eventType+" unknown");
         }
