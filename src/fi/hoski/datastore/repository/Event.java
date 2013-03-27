@@ -30,7 +30,7 @@ import java.util.*;
 public class Event extends DataObject implements Comparable<Event>, Reservable
 {
 
-    public enum EventType {LAUNCH, LIFT, INSPECTION, HULL_INSPECTION, OTHER};
+    public static enum EventType {LAUNCH, LIFT, INSPECTION, HULL_INSPECTION, OTHER};
     
     public static final String KIND = Repository.EVENT;
     

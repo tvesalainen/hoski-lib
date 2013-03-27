@@ -23,10 +23,7 @@ import fi.hoski.mail.MailService;
 import fi.hoski.mail.MailServiceImpl;
 import fi.hoski.util.Day;
 import fi.hoski.util.EntityReferences;
-import java.text.ParseException;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -125,7 +122,7 @@ public class EventsImpl implements Events
     public void createReservation(Reservation reservation, boolean replace) throws EntityNotFoundException, EventFullException, DoubleBookingException, BoatNotFoundException, MandatoryPropertyMissingException
     {
         Key boatKey = (Key) reservation.get(Reservation.BOAT);
-        if (boatKey == null)
+        if (boatKey == null && reservation.getEventType() != Event.EventType.OTHER)
         {
             throw new BoatNotFoundException("boat not found");
         }

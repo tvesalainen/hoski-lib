@@ -67,12 +67,12 @@ public class Reservation extends DataObject implements Comparable<Reservation>
     
     static
     {
-        BASE_MODEL.property(BOAT, Key.class, true, true);
+        BASE_MODEL.property(BOAT, Key.class, true);
         BASE_MODEL.property(ORDER, Long.class, true, false, 0L);
         BASE_MODEL.property(LASTNAME, String.class, false, true);
         BASE_MODEL.property(FIRSTNAME, String.class, false, true);
         BASE_MODEL.property(BOATNAME, String.class, false);
-        BASE_MODEL.property(DOCKYARDPLACE, Long.class, false, true);
+        BASE_MODEL.property(DOCKYARDPLACE, Long.class, false);
         BASE_MODEL.property(MOBILEPHONE, String.class);
         BASE_MODEL.property(EMAIL, String.class);
         BASE_MODEL.property(NOTES, Text.class);
@@ -149,6 +149,7 @@ public class Reservation extends DataObject implements Comparable<Reservation>
     {
         this(event.getEventType(), entity);
         parent = event;
+        this.eventType = event.getEventType();
     }
 
     private Reservation(EventType eventType, DataObjectModel model)
@@ -220,12 +221,19 @@ public class Reservation extends DataObject implements Comparable<Reservation>
             {
                 throw new IllegalArgumentException("parent not found");
             }
-            Key boatKey = (Key) get(BOAT);
-            if (boatKey == null)
+            if (eventType != Event.EventType.OTHER)
             {
-                throw new IllegalArgumentException("boat not found");
+                Key boatKey = (Key) get(BOAT);
+                if (boatKey == null)
+                {
+                    throw new IllegalArgumentException("boat not found");
+                }
+                return KeyFactory.createKey(prn.createKey(), KIND, boatKey.getId());
             }
-            return KeyFactory.createKey(prn.createKey(), KIND, boatKey.getId());
+            else
+            {
+                return KeyFactory.createKey(prn.createKey(), KIND, System.currentTimeMillis());
+            }
         }
     }
 
