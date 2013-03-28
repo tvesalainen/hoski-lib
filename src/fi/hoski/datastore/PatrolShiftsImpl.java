@@ -145,7 +145,7 @@ public class PatrolShiftsImpl implements PatrolShifts
         Entity swapLog = createSwapLog();
         swapLog.setUnindexedProperty(Repository.CREATOR, activeSwapRequest.get(Repository.CREATOR));
         
-        Key msgKey = KeyFactory.createKey(Messages.KIND, Messages.NAME);
+        Key msgKey = KeyFactory.createKey(Keys.getRootKey(), Messages.KIND, Messages.NAME);
         Entity msgEntity = datastore.get(msgKey);
         
         Day activeSwapRequestDay = (Day) activeSwapRequest.get(Repository.PAIVA);
