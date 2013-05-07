@@ -82,4 +82,9 @@ public class RaceFleet extends DataObject implements Reservable
         return (RaceSeries) parent;
     }
 
+    public String getName()
+    {
+        return (String) get(FLEET);
+    }
+
 }

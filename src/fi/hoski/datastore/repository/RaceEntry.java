@@ -581,4 +581,9 @@ public class RaceEntry extends DataObject implements PLSBoat
     {
         return getRaceFleet().getRaceSeries();
     }
+
+    public String getFleet()
+    {
+        return (String) get(RaceEntry.FLEET);
+    }
 }

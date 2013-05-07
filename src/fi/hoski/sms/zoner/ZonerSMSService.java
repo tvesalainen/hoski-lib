@@ -21,6 +21,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import fi.hoski.datastore.Repository;
+import fi.hoski.datastore.SMSNotConfiguredException;
 import fi.hoski.datastore.repository.Keys;
 import fi.hoski.datastore.repository.Messages;
 import fi.hoski.sms.SMSService;
@@ -65,15 +66,24 @@ public class ZonerSMSService implements SMSService
         set(Field.PASSWORD, password);
     }
 
-    public ZonerSMSService(DatastoreService datastore)
+    public ZonerSMSService(DatastoreService datastore) throws SMSNotConfiguredException
     {
         Key key = KeyFactory.createKey(Keys.getRootKey(), Repository.MESSAGES, Messages.NAME);
         Entity entity;
         try
         {
             entity = datastore.get(key);
-            set(Field.USERNAME, entity.getProperty(Messages.SMSUSERNAME).toString());
-            set(Field.PASSWORD, entity.getProperty(Messages.SMSPASSWORD).toString());
+            String username = (String) entity.getProperty(Messages.SMSUSERNAME);
+            String password = (String) entity.getProperty(Messages.SMSPASSWORD);
+            if (username != null && password != null)
+            {
+                set(Field.USERNAME, username);
+                set(Field.PASSWORD, password);
+            }
+            else
+            {
+                throw new SMSNotConfiguredException("SMS username/password not configured");
+            }
         }
         catch (EntityNotFoundException ex)
         {
