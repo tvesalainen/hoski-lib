@@ -22,6 +22,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import fi.hoski.datastore.Repository;
+import static fi.hoski.datastore.repository.Reservable.CLOSINGDATE;
+import static fi.hoski.datastore.repository.Reservable.EVENTDATE;
 import fi.hoski.util.Day;
 import fi.hoski.util.Time;
 
@@ -87,4 +89,44 @@ public class RaceFleet extends DataObject implements Reservable
         return (String) get(FLEET);
     }
 
+    public Double getFee()
+    {
+        return (Double) get(FEE);
+    }
+    public Double getFee2()
+    {
+        return (Double) get(FEE2);
+    }
+    public Boolean getRanking()
+    {
+        return (Boolean) get(RANKING);
+    }
+    public String getFleet()
+    {
+        return (String) get(FLEET);
+    }
+    public String getClazz()
+    {
+        return (String) get(CLASS);
+    }
+    public String getRatingSystem()
+    {
+        return (String) get(RATINGSYSTEM);
+    }
+    public Day getEventDate()
+    {
+        return (Day) get(EVENTDATE);
+    }
+    public Time getStartTime()
+    {
+        return (Time) get(STARTTIME);
+    }
+    public Day getClosingDate()
+    {
+        return (Day) get(CLOSINGDATE);
+    }
+    public Day getClosingDate2()
+    {
+        return (Day) get(CLOSINGDATE2);
+    }
 }
