@@ -95,7 +95,11 @@ public class DataObject implements Cloneable
     @Override
     public DataObject clone()
     {
-        return new DataObject(data.clone());
+        DataObject dataObject = new DataObject(data.clone());
+        dataObject.parent = parent;
+        ArrayList<DataObjectObserver> al = (ArrayList<DataObjectObserver>) observers;
+        dataObject.observers = (List<DataObjectObserver>) al.clone();
+        return dataObject;
     }
 
     public void addObserver(DataObjectObserver observer)
