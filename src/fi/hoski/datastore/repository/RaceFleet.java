@@ -59,6 +59,8 @@ public class RaceFleet extends DataObject implements Reservable
         MODEL.property(RANKING, Boolean.class, true, false, false);
     }
 
+    private RaceFleet copiedFrom;
+    
     public RaceFleet(RaceSeries raceSeries)
     {
         super(new MapData(MODEL));
@@ -69,6 +71,19 @@ public class RaceFleet extends DataObject implements Reservable
     {
         super(MODEL, entity);
         this.parent = raceSeries;
+    }
+
+    @Override
+    public RaceFleet clone()
+    {
+        RaceFleet clone = (RaceFleet) super.clone();
+        clone.copiedFrom = this;
+        return clone;
+    }
+
+    public RaceFleet getCopiedFrom()
+    {
+        return copiedFrom;
     }
 
     @Override
