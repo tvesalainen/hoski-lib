@@ -29,7 +29,7 @@ public class Attachment extends DataObject implements Comparable<Attachment>
 {
     public static final String KIND = "Attachment";
 
-    public enum Type {NOR, SI, RESULT, OTHER, PICS };   // don't change order. If needed add new entries to the end!
+    public enum Type {NOR, SI, RESULT, OTHER, PICS, NOTICE };   // don't change order. If needed add new entries to the end!
     
     public static final String TYPE = "Type";
     public static final String TITLE = "Title";
