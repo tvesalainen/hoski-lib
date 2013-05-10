@@ -21,6 +21,7 @@ import com.google.appengine.api.datastore.Entity;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 /**
@@ -33,13 +34,13 @@ public class MapData extends DataObjectData implements Cloneable
     public MapData(DataObjectModel model)
     {
         super(model);
-        valueMap = new HashMap<String,Object>();
+        valueMap = new HashMap<>();
     }
     
     public MapData(DataObjectModel model, Properties properties)
     {
         super(model);
-        valueMap = new HashMap<String,Object>();
+        valueMap = new HashMap<>();
         for (String property : properties.stringPropertyNames())
         {
             valueMap.put(property, properties.getProperty(property));
@@ -50,6 +51,16 @@ public class MapData extends DataObjectData implements Cloneable
     {
         super(model);
         valueMap = map;
+    }
+
+    public MapData(DataObjectData data)
+    {
+        super(data.model);
+        valueMap = new HashMap<>();
+        for (String key : model.getPropertyList())
+        {
+            valueMap.put(key, data.get(key));
+        }
     }
     
     @Override

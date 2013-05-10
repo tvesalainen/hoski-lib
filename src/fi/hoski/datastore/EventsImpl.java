@@ -69,9 +69,9 @@ public class EventsImpl implements Events
         query.setAncestor(typeKey);
         if (from != null)
         {
-            query.addFilter(Event.EVENTDATE, Query.FilterOperator.GREATER_THAN, from.getValue());
+            query.addFilter(Event.EventDate, Query.FilterOperator.GREATER_THAN, from.getValue());
         }
-        query.addSort(Event.EVENTDATE);
+        query.addSort(Event.EventDate);
         PreparedQuery preparedQuery = datastore.prepare(query);
         List<Event> eventList = Event.create(preparedQuery.asList(FetchOptions.Builder.withLimit(count)));
         for (Event event : eventList)
@@ -89,7 +89,7 @@ public class EventsImpl implements Events
         List<Key> keyList = new ArrayList<Key>();
         for (Event event : events)
         {
-            Day eventDate = (Day) event.get(Event.EVENTDATE);
+            Day eventDate = (Day) event.get(Event.EventDate);
             Key key = event.createKey();
             // if event is over we are allowed to remove it and all childs
             if (now.after(eventDate))
@@ -180,7 +180,7 @@ public class EventsImpl implements Events
                 String sender = (String) msgEntity.getProperty(Messages.PASSWORDFROMADDRESS);
                 String messageSubject = (String) msgEntity.getProperty(Messages.RESERVATIONMESSAGESUBJECT);
                 Text messageText = (Text) msgEntity.getProperty(Messages.RESERVATIONMESSAGEBODY);
-                Day date = (Day) event.get(Event.EVENTDATE);
+                Day date = (Day) event.get(Event.EventDate);
                 EventType eventType = reservation.getEventType();
                 String eventStr = resourceBundle.getString(eventType.name());
                 String message = String.format(messageText.getValue(), date.toString(), eventStr.toLowerCase());
@@ -263,8 +263,8 @@ public class EventsImpl implements Events
     {
         int count = 0;
         count = childCount(event);
-        Day eventDate = (Day) event.get(Event.EVENTDATE);
-        Day closingDate = (Day) event.get(Event.CLOSINGDATE);
+        Day eventDate = (Day) event.get(Event.EventDate);
+        Day closingDate = (Day) event.get(Event.ClosingDate);
         Long maxEntries = (Long) event.get(Event.MAXENTRIES);
         String notes = (String) event.get(Event.NOTES);
         if (notes == null)

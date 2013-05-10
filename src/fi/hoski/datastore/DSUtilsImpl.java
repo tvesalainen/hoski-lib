@@ -115,7 +115,7 @@ public class DSUtilsImpl implements DSUtils
             RaceFleet raceFleet = (RaceFleet) newInstance(rfEntity);
             return new RaceEntry(raceFleet, entity);
         }
-        if (RaceFleet.KIND.equals(entity.getKind()))
+        if (RaceFleet.Kind.equals(entity.getKind()))
         {
             Entity rsEntity = datastore.get(entity.getParent());
             RaceSeries raceSeries = (RaceSeries) newInstance(rsEntity);
@@ -172,9 +172,9 @@ public class DSUtilsImpl implements DSUtils
         {
             return PatrolShift.MODEL;
         }
-        if (RaceFleet.KIND.equals(kind))
+        if (RaceFleet.Kind.equals(kind))
         {
-            return RaceFleet.MODEL;
+            return RaceFleet.Model;
         }
         if (RaceSeries.KIND.equals(kind))
         {
@@ -377,7 +377,7 @@ public class DSUtilsImpl implements DSUtils
     @Override
     public void put(List<? extends DataObject> dataObjectList)
     {
-        List<Entity> list = new ArrayList<Entity>();
+        List<Entity> list = new ArrayList<>();
         for (DataObject dataObject : dataObjectList)
         {
             list.add(dataObject.getEntity());

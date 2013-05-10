@@ -48,9 +48,9 @@ public class RaceSeries extends DataObject implements Reservable
     {
         MODEL.property(ID);
         MODEL.property(EVENT, String.class, false, true);
-        MODEL.property(EVENTDATE, Day.class, true, true);
+        MODEL.property(EventDate, Day.class, true, true);
         MODEL.property(TO, Day.class);
-        MODEL.property(CLOSINGDATE, Day.class, true, true);
+        MODEL.property(ClosingDate, Day.class, true, true);
         MODEL.property(CLOSINGDATE2, Day.class);
         MODEL.property(STARTTIME, Time.class, false, false);
         MODEL.property(RACE_AREA, String.class);
@@ -87,7 +87,7 @@ public class RaceSeries extends DataObject implements Reservable
     public Key createKey()
     {
         String id = (String) get(ID);
-        Day date = (Day) get(EVENTDATE);
+        Day date = (Day) get(EventDate);
         return KeyFactory.createKey(Keys.getYearKey(date), KIND, date.getValue()+id);
     }
 

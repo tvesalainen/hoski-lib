@@ -97,8 +97,11 @@ public class DataObject implements Cloneable
     {
         DataObject dataObject = new DataObject(data.clone());
         dataObject.parent = parent;
-        ArrayList<DataObjectObserver> al = (ArrayList<DataObjectObserver>) observers;
-        dataObject.observers = (List<DataObjectObserver>) al.clone();
+        if (observers != null)
+        {
+            ArrayList<DataObjectObserver> al = (ArrayList<DataObjectObserver>) observers;
+            dataObject.observers = (List<DataObjectObserver>) al.clone();
+        }
         return dataObject;
     }
 

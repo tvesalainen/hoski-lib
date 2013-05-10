@@ -22,63 +22,78 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import fi.hoski.datastore.Repository;
-import static fi.hoski.datastore.repository.Reservable.CLOSINGDATE;
-import static fi.hoski.datastore.repository.Reservable.EVENTDATE;
+import static fi.hoski.datastore.repository.Reservable.ClosingDate;
+import static fi.hoski.datastore.repository.Reservable.EventDate;
 import fi.hoski.util.Day;
 import fi.hoski.util.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Timo Vesalainen
  */
 public class RaceFleet extends DataObject implements Reservable
 {
-    public static final String KIND = Repository.RACEFLEET;
+    public static final String Kind = Repository.RACEFLEET;
     
-    public static final String FLEET ="Fleet";
-    public static final String CLASS ="Class";
-    public static final String RATINGSYSTEM ="RatingSystem";
-    public static final String STARTTIME = "StartTime";
-    public static final String FEE ="Fee";
-    public static final String FEE2 ="Fee2";
-    public static final String CLOSINGDATE2 ="EventClosingDate2";
-    public static final String RANKING ="Ranking";
+    public static final String Fleet ="Fleet";
+    public static final String Class ="Class";
+    public static final String RatingSystem ="RatingSystem";
+    public static final String StartTime = "StartTime";
+    public static final String Fee ="Fee";
+    public static final String Fee2 ="Fee2";
+    public static final String ClosingDate2 ="EventClosingDate2";
+    public static final String Ranking ="Ranking";
+    public static final String SailWaveId ="SailWaveId";
     
-    public static final DataObjectModel MODEL = new DataObjectModel(KIND);
+    public static final DataObjectModel Model = new DataObjectModel(Kind);
     
     static
     {
-        MODEL.property(FLEET);
-        MODEL.property(CLASS);
-        MODEL.property(EVENTDATE, Day.class, true);
-        MODEL.property(STARTTIME, Time.class, false, false);
-        MODEL.property(CLOSINGDATE, Day.class, true);
-        MODEL.property(CLOSINGDATE2, Day.class);
-        MODEL.property(RATINGSYSTEM);
-        MODEL.property(FEE, Double.class, false, false, 0.0);
-        MODEL.property(FEE2, Double.class, false, false, 0.0);
-        MODEL.property(RANKING, Boolean.class, true, false, false);
+        Model.property(Fleet);
+        Model.property(Class);
+        Model.property(EventDate, Day.class, true);
+        Model.property(StartTime, Time.class, false, false);
+        Model.property(ClosingDate, Day.class, true);
+        Model.property(ClosingDate2, Day.class);
+        Model.property(RatingSystem);
+        Model.property(Fee, Double.class, false, false, 0.0);
+        Model.property(Fee2, Double.class, false, false, 0.0);
+        Model.property(Ranking, Boolean.class, true, false, false);
+        Model.property(SailWaveId, Long.class, false, true);
     }
 
     private RaceFleet copiedFrom;
     
     public RaceFleet(RaceSeries raceSeries)
     {
-        super(new MapData(MODEL));
+        super(new MapData(Model));
         this.parent = raceSeries;
     }
 
     public RaceFleet(RaceSeries raceSeries, Entity entity)
     {
-        super(MODEL, entity);
+        super(Model, entity);
         this.parent = raceSeries;
     }
 
-    @Override
-    public RaceFleet clone()
+    public RaceFleet(DataObjectData data)
     {
-        RaceFleet clone = (RaceFleet) super.clone();
-        clone.copiedFrom = this;
-        return clone;
+        super(data);
+    }
+
+    public RaceFleet makeCopy(int newNumber)
+    {
+        RaceFleet copy = new RaceFleet(new MapData(data));
+        copy.set(RaceFleet.SailWaveId, newNumber);
+        copy.parent = parent;
+        if (observers != null)
+        {
+            ArrayList<DataObjectObserver> al = (ArrayList<DataObjectObserver>) observers;
+            copy.observers = (List<DataObjectObserver>) al.clone();
+        }
+        copy.copiedFrom = this;
+        return copy;
     }
 
     public RaceFleet getCopiedFrom()
@@ -89,9 +104,9 @@ public class RaceFleet extends DataObject implements Reservable
     @Override
     public Key createKey()
     {
-        String fleet = (String)get(FLEET);
-        Day eventDate = (Day) get(EVENTDATE);
-        return KeyFactory.createKey(parent.createKey(), KIND, fleet+eventDate.getValue());
+        String fleet = (String)get(Fleet);
+        Day eventDate = (Day) get(EventDate);
+        return KeyFactory.createKey(parent.createKey(), Kind, fleet+eventDate.getValue());
     }
 
     public RaceSeries getRaceSeries()
@@ -101,47 +116,52 @@ public class RaceFleet extends DataObject implements Reservable
 
     public String getName()
     {
-        return (String) get(FLEET);
+        return (String) get(Fleet);
     }
 
     public Double getFee()
     {
-        return (Double) get(FEE);
+        return (Double) get(Fee);
     }
     public Double getFee2()
     {
-        return (Double) get(FEE2);
+        return (Double) get(Fee2);
     }
     public Boolean getRanking()
     {
-        return (Boolean) get(RANKING);
+        return (Boolean) get(Ranking);
     }
     public String getFleet()
     {
-        return (String) get(FLEET);
+        return (String) get(Fleet);
     }
     public String getClazz()
     {
-        return (String) get(CLASS);
+        return (String) get(Class);
     }
     public String getRatingSystem()
     {
-        return (String) get(RATINGSYSTEM);
+        return (String) get(RatingSystem);
     }
     public Day getEventDate()
     {
-        return (Day) get(EVENTDATE);
+        return (Day) get(EventDate);
     }
     public Time getStartTime()
     {
-        return (Time) get(STARTTIME);
+        return (Time) get(StartTime);
     }
     public Day getClosingDate()
     {
-        return (Day) get(CLOSINGDATE);
+        return (Day) get(ClosingDate);
     }
     public Day getClosingDate2()
     {
-        return (Day) get(CLOSINGDATE2);
+        return (Day) get(ClosingDate2);
+    }
+    public int getSailWaveId()
+    {
+        Long l = (Long) get(SailWaveId);
+        return l.intValue();
     }
 }

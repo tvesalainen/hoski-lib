@@ -41,8 +41,8 @@ public class Event extends DataObject implements Comparable<Event>, Reservable
     
     static
     {
-        MODEL.property(EVENTDATE, Day.class, true, true);
-        MODEL.property(CLOSINGDATE, Day.class, true, true);
+        MODEL.property(EventDate, Day.class, true, true);
+        MODEL.property(ClosingDate, Day.class, true, true);
         MODEL.property(MAXENTRIES, Long.class, false, true);
         MODEL.property(NOTES, String.class);
     }
@@ -103,7 +103,7 @@ public class Event extends DataObject implements Comparable<Event>, Reservable
     }
     public boolean isClosed()
     {
-        Day closingDate = (Day) get(Event.CLOSINGDATE);
+        Day closingDate = (Day) get(Event.ClosingDate);
         if (closingDate != null)
         {
             Day now = new Day();
@@ -162,9 +162,9 @@ public class Event extends DataObject implements Comparable<Event>, Reservable
     @Override
     protected Object getDefault(String property)
     {
-        if (CLOSINGDATE.equals(property))
+        if (ClosingDate.equals(property))
         {
-            Date date = (Date) get(EVENTDATE);
+            Date date = (Date) get(EventDate);
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             cal.add(Calendar.DAY_OF_YEAR, -7);
@@ -200,7 +200,7 @@ public class Event extends DataObject implements Comparable<Event>, Reservable
 
     public Long getUid()
     {
-        Day date = (Day) get(EVENTDATE);
+        Day date = (Day) get(EventDate);
         return date.getValue();
     }
     @Override
@@ -211,21 +211,21 @@ public class Event extends DataObject implements Comparable<Event>, Reservable
     }
     public Key getTypeKey()
     {
-        Day eventDate = (Day) get(Event.EVENTDATE);
+        Day eventDate = (Day) get(Event.EventDate);
         return Keys.getTypeKey(eventDate, getEventType());
     }
     @Override
     public int compareTo(Event o)
     {
-        Day d1 = (Day) get(EVENTDATE);
-        Day d2 = (Day) o.get(EVENTDATE);
+        Day d1 = (Day) get(EventDate);
+        Day d2 = (Day) o.get(EventDate);
         return d1.compareTo(d2);
     }
 
     @Override
     public String toString()
     {
-        Day date = (Day) get(EVENTDATE);
+        Day date = (Day) get(EventDate);
         return date.toString();
     }
 }

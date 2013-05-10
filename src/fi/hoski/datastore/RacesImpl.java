@@ -74,8 +74,21 @@ public class RacesImpl implements Races
     @Override
     public void putRace(RaceSeries raceSeries, List<RaceFleet> classList)
     {
-        entities.put(raceSeries);
-        entities.put(classList);
+        Transaction tr = datastore.beginTransaction();
+        try
+        {
+            entities.deleteWithChilds(raceSeries);
+            entities.put(raceSeries);
+            entities.put(classList);
+            tr.commit();
+        }
+        finally
+        {
+            if (tr.isActive())
+            {
+                tr.rollback();
+            }
+        }
     }
 
     @Override
@@ -89,7 +102,7 @@ public class RacesImpl implements Races
         List<RaceSeries> list = new ArrayList<RaceSeries>();
         Query query = new Query(RaceSeries.KIND);
         query.setAncestor(entities.getYearKey());
-        query.addSort(RaceSeries.EVENTDATE);
+        query.addSort(RaceSeries.EventDate);
         PreparedQuery prepared = datastore.prepare(query);
         for (Entity entity : prepared.asIterable())
         {
@@ -102,7 +115,7 @@ public class RacesImpl implements Races
     public List<RaceFleet> getFleets(RaceSeries raceSeries) throws EntityNotFoundException
     {
         List<RaceFleet> list = new ArrayList<RaceFleet>();
-        Query query = new Query(RaceFleet.KIND);
+        Query query = new Query(RaceFleet.Kind);
         query.setAncestor(raceSeries.createKey());
         PreparedQuery prepared = datastore.prepare(query);
         for (Entity entity : prepared.asIterable())
@@ -115,7 +128,7 @@ public class RacesImpl implements Races
     @Override
     public List<RaceEntry> getRaceEntriesFor(DataObject race) throws EntityNotFoundException
     {
-        List<RaceEntry> list = new ArrayList<RaceEntry>();
+        List<RaceEntry> list = new ArrayList<>();
         Key parent = race.createKey();
         Query query = new Query(RaceEntry.KIND);
         query.setAncestor(parent);
@@ -128,12 +141,22 @@ public class RacesImpl implements Races
     }
 
     @Override
+    public int getNumberOfRaceEntriesFor(DataObject race) throws EntityNotFoundException
+    {
+        Key parent = race.createKey();
+        Query query = new Query(RaceEntry.KIND);
+        query.setAncestor(parent);
+        PreparedQuery prepared = datastore.prepare(query);
+        return prepared.countEntities(FetchOptions.Builder.withDefaults());
+    }
+
+    @Override
     public List<RaceEntry> getUnpaidRaceEntries() throws EntityNotFoundException
     {
         List<RaceEntry> list = new ArrayList<RaceEntry>();
         Query query = new Query(RaceEntry.KIND);
         query.addFilter(RaceEntry.PAID, Query.FilterOperator.EQUAL, 0.0);
-        //query.addFilter(RaceEntry.FEE, Query.FilterOperator.GREATER_THAN, 0.0);
+        //query.addFilter(RaceEntry.Fee, Query.FilterOperator.GREATER_THAN, 0.0);
         PreparedQuery prepared = datastore.prepare(query);
         for (Entity entity : prepared.asIterable())
         {
@@ -188,7 +211,7 @@ public class RacesImpl implements Races
                 }
                 tr.commit();
                 
-                Day date = (Day) raceFleet.get(RaceFleet.EVENTDATE);
+                Day date = (Day) raceFleet.get(RaceFleet.EventDate);
                 Day due = new Day();
                 String bankAccount = entities.getMessage(Messages.RACEBANKACCOUNT);
                 String bic = entities.getMessage(Messages.RACEBIC);

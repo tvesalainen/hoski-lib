@@ -23,8 +23,6 @@ import fi.hoski.util.Day;
 import fi.hoski.util.Time;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Timo Vesalainen
@@ -58,6 +56,7 @@ public class EntityData extends DataObjectData implements Cloneable
         return entity.getProperties();
     }
 
+    @Override
     public Entity getEntity()
     {
         return entity;

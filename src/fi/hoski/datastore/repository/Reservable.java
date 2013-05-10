@@ -22,6 +22,6 @@ package fi.hoski.datastore.repository;
  */
 public interface Reservable
 {
-    public static final String EVENTDATE = "EventDate";
-    public static final String CLOSINGDATE = "EventClosingDate";
+    public static final String EventDate = "EventDate";
+    public static final String ClosingDate = "EventClosingDate";
 }

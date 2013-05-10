@@ -41,6 +41,8 @@ public interface Races
     
     List<RaceEntry> getRaceEntriesFor(DataObject race) throws EntityNotFoundException;
     
+    int getNumberOfRaceEntriesFor(DataObject race) throws EntityNotFoundException;
+    
     List<RaceEntry> getUnpaidRaceEntries() throws EntityNotFoundException;
     
     BankingBarcode getBarcode(Key raceEntryKey) throws EntityNotFoundException;

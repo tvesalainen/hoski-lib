@@ -96,8 +96,8 @@ public class KeyInfo
             Entity rsEntity = entities.get(key);
             RaceSeries raceSeries = new RaceSeries(rsEntity);
             String event = (String) raceSeries.get(RaceSeries.EVENT);
-            Day eventDate = (Day) raceSeries.get(RaceSeries.EVENTDATE);
-            Day closingDate = (Day) raceSeries.get(RaceSeries.CLOSINGDATE);
+            Day eventDate = (Day) raceSeries.get(RaceSeries.EventDate);
+            Day closingDate = (Day) raceSeries.get(RaceSeries.ClosingDate);
             boolean closed = closed(closingDate);
             Day to = (Day) raceSeries.get(RaceSeries.TO);
             if (to == null)
@@ -129,12 +129,12 @@ public class KeyInfo
             Entity rfEntity = entities.get(key);
             RaceFleet raceFleet = (RaceFleet) entities.newInstance(rfEntity);
             RaceSeries raceSeries = raceFleet.getRaceSeries();
-            String fleet = (String) raceFleet.get(RaceFleet.FLEET);
-            Day eventDate = (Day) raceFleet.get(RaceFleet.EVENTDATE);
-            Day closingDate = (Day) raceFleet.get(RaceFleet.CLOSINGDATE);
+            String fleet = (String) raceFleet.get(RaceFleet.Fleet);
+            Day eventDate = (Day) raceFleet.get(RaceFleet.EventDate);
+            Day closingDate = (Day) raceFleet.get(RaceFleet.ClosingDate);
             boolean closed = closed(closingDate);
-            Time time = (Time) raceFleet.get(RaceFleet.STARTTIME);
-            Boolean ranking = (Boolean) raceFleet.get(RaceFleet.RANKING);
+            Time time = (Time) raceFleet.get(RaceFleet.StartTime);
+            Boolean ranking = (Boolean) raceFleet.get(RaceFleet.Ranking);
             String format = null;
             if (time != null)
             {
@@ -176,7 +176,7 @@ public class KeyInfo
             String page = (String) raceSeries.get(RaceSeries.PAGE);
             if (page == null)
             {
-                String ratingSystem = (String) raceFleet.get(RaceFleet.RATINGSYSTEM);
+                String ratingSystem = (String) raceFleet.get(RaceFleet.RatingSystem);
                 page = ratingSystem.toLowerCase() + ".html";
             }
             editLink = "<a href=\"" + page+"?ancestor=" + KeyFactory.keyToString(key) + "\" >" + label + "</a>";
@@ -195,7 +195,7 @@ public class KeyInfo
                 Event.EventType eventType = Event.EventType.values()[(int) parent.getId() - 1];
                 Entity eventEntity = entities.get(key);
                 Event event = new Event(eventEntity);
-                Day day = (Day) event.get(Event.EVENTDATE);
+                Day day = (Day) event.get(Event.EventDate);
                 label = events.getEventLabel(event);
                 editLink = "<a href=\"" + eventType.name().toLowerCase() + ".html?ancestor=" + KeyFactory.keyToString(key) + "&startDate=" + day.getDate().getTime() + "\" >" + label + "</a>";
                 menuLink = "<a href=\"list?ancestor=" + KeyFactory.keyToString(key) + "&" + parameters + "\" >" + label + "</a>";
@@ -257,8 +257,8 @@ public class KeyInfo
                 map.put(prefix + property, raceSeries.get(property));
             }
             String event = (String) raceSeries.get(RaceSeries.EVENT);
-            Day eventDate = (Day) raceSeries.get(RaceSeries.EVENTDATE);
-            Day closingDate = (Day) raceSeries.get(RaceSeries.CLOSINGDATE);
+            Day eventDate = (Day) raceSeries.get(RaceSeries.EventDate);
+            Day closingDate = (Day) raceSeries.get(RaceSeries.ClosingDate);
             boolean closed = false;
             if (closingDate != null)
             {
@@ -304,10 +304,10 @@ public class KeyInfo
             {
                 map.put(prefix + property, raceFleet.get(property));
             }
-            String fleet = (String) raceFleet.get(RaceFleet.FLEET);
-            Day eventDate = (Day) raceFleet.get(RaceFleet.EVENTDATE);
-            Day closingDate = (Day) raceFleet.get(RaceFleet.CLOSINGDATE);
-            Day closingDate2 = (Day) raceFleet.get(RaceFleet.CLOSINGDATE2);
+            String fleet = (String) raceFleet.get(RaceFleet.Fleet);
+            Day eventDate = (Day) raceFleet.get(RaceFleet.EventDate);
+            Day closingDate = (Day) raceFleet.get(RaceFleet.ClosingDate);
+            Day closingDate2 = (Day) raceFleet.get(RaceFleet.ClosingDate2);
             if (closingDate2 == null)
             {
                 closingDate2 = closingDate;
@@ -319,8 +319,8 @@ public class KeyInfo
                 closed = now.after(closingDate2);
                 map.put(prefix + "isEventClosed", closed);
             }
-            Time time = (Time) raceFleet.get(RaceFleet.STARTTIME);
-            Boolean ranking = (Boolean) raceFleet.get(RaceFleet.RANKING);
+            Time time = (Time) raceFleet.get(RaceFleet.StartTime);
+            Boolean ranking = (Boolean) raceFleet.get(RaceFleet.Ranking);
             String format = null;
             if (time != null)
             {
@@ -359,10 +359,10 @@ public class KeyInfo
                 }
             }
             lab = String.format(format, fleet, eventDate, closingDate, time);
-            String ratingSystem = (String) raceFleet.get(RaceFleet.RATINGSYSTEM);
+            String ratingSystem = (String) raceFleet.get(RaceFleet.RatingSystem);
             map.put(prefix + "RaceFleet", lab);
             map.put(prefix + "RaceRatingSystem", ratingSystem);
-            Double fee = (Double) raceFleet.get(RaceFleet.FEE);
+            Double fee = (Double) raceFleet.get(RaceFleet.Fee);
             if (fee != null)
             {
                 map.put(prefix + "isFree", fee == 0);
@@ -434,7 +434,7 @@ public class KeyInfo
                 Entity eventEntity = entities.get(key);
                 map.putAll(eventEntity.getProperties());
                 Event event = new Event(eventEntity);
-                Day day = (Day) event.get(Event.EVENTDATE);
+                Day day = (Day) event.get(Event.EventDate);
                 lab = events.getEventLabel(event);
                 Long maxEntriesL = (Long) event.get(Event.MAXENTRIES);
                 if (maxEntriesL != null)
