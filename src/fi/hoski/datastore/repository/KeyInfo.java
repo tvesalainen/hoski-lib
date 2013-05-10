@@ -359,7 +359,8 @@ public class KeyInfo
                     format = repositoryBundle.getString("RaceFleetOpen");
                 }
             }
-            lab = String.format(format, fleet, eventDate, closingDate, time);
+            int numberOfRaceEntries = races.getNumberOfRaceEntriesFor(raceFleet);
+            lab = String.format(format, fleet, eventDate, closingDate, time, numberOfRaceEntries);
             String ratingSystem = (String) raceFleet.get(RaceFleet.RatingSystem);
             map.put(prefix + "RaceFleet", lab);
             map.put(prefix + "RaceRatingSystem", ratingSystem);
