@@ -122,7 +122,9 @@ public class KeyInfo
             {
                 format = repositoryBundle.getString("RaceSeriesOpen");
             }
-            label = String.format(format, event, eventDateString, closingDate);
+            int numberOfRaceEntries = races.getNumberOfRaceEntriesFor(raceSeries);
+            int daysTo = getDaysTo(eventDate);
+            label = String.format(format, event, eventDateString, closingDate, numberOfRaceEntries, daysTo);
         }
         if (Repository.RACEFLEET.equals(key.getKind()))
         {
@@ -290,7 +292,9 @@ public class KeyInfo
             {
                 format = repositoryBundle.getString("RaceSeriesOpen");
             }
-            lab = String.format(format, event, eventDateString, closingDate);
+            int numberOfRaceEntries = races.getNumberOfRaceEntriesFor(raceSeries);
+            int daysTo = getDaysTo(eventDate);
+            lab = String.format(format, event, eventDateString, closingDate, numberOfRaceEntries, daysTo);
             //map.put(prefix+"RaceEvent", event);
             map.put(prefix + "RaceEventFrom", eventDate.toString());
             map.put(prefix + "RaceEventTo", to.toString());
@@ -487,5 +491,18 @@ public class KeyInfo
     public String getMenuLink()
     {
         return menuLink;
+    }
+
+    private int getDaysTo(Day eventDate)
+    {
+        Day now = new Day();
+        if (eventDate.after(now))
+        {
+            return (int) ((eventDate.getDate().getTime()-System.currentTimeMillis())/86400000);
+        }
+        else
+        {
+            return 0;
+        }
     }
 }
