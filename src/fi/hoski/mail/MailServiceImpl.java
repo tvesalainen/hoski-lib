@@ -16,14 +16,10 @@
 */
 package fi.hoski.mail;
 
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import fi.hoski.datastore.repository.DataObject;
-import fi.hoski.datastore.repository.Messages;
 import fi.hoski.datastore.repository.RaceEntry;
 import fi.hoski.datastore.repository.Reservation;
 import java.io.UnsupportedEncodingException;

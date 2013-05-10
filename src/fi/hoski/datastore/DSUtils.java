@@ -35,9 +35,7 @@ import java.util.Map;
  */
 public interface DSUtils
 {
-    List<Entity> getChilds(Key parent);
-            
-    List<Entity> getChilds(Key parent, String kind);
+    List<Entity> getChilds(Key parent, String... kinds);
             
     String getMessage(String key);
     
@@ -87,7 +85,7 @@ public interface DSUtils
     
     void delete(DataObject dataObject);
     
-    void deleteWithChilds(DataObject dataObject);
+    void deleteWithChilds(DataObject dataObject, String... kinds);
     
     void delete(List<? extends DataObject> dataObjectList);
     

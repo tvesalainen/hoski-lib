@@ -77,8 +77,8 @@ public class RacesImpl implements Races
         Transaction tr = datastore.beginTransaction();
         try
         {
-            entities.deleteWithChilds(raceSeries);
             entities.put(raceSeries);
+            entities.deleteWithChilds(raceSeries, "RaceFleet");
             entities.put(classList);
             tr.commit();
         }
@@ -94,8 +94,9 @@ public class RacesImpl implements Races
     @Override
     public void removeRace(RaceSeries raceSeries)
     {
-        entities.deleteWithChilds(raceSeries);
+        entities.deleteWithChilds(raceSeries, "RaceFleet");
     }
+    
     @Override
     public List<RaceSeries> getRaces() throws EntityNotFoundException
     {

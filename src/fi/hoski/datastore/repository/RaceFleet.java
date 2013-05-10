@@ -82,6 +82,7 @@ public class RaceFleet extends DataObject implements Reservable
         super(data);
     }
 
+    @SuppressWarnings("unchecked")
     public RaceFleet makeCopy(int newNumber)
     {
         RaceFleet copy = new RaceFleet(new MapData(data));

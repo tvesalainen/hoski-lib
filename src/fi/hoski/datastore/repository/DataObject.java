@@ -93,6 +93,7 @@ public class DataObject implements Cloneable
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public DataObject clone()
     {
         DataObject dataObject = new DataObject(data.clone());

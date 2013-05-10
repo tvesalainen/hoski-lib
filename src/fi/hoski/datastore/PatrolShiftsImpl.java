@@ -49,7 +49,7 @@ public class PatrolShiftsImpl implements PatrolShifts
     private SMSService smsService;
     private int margin = 5;
     
-    public PatrolShiftsImpl(LogWrapper log, int margin) throws EntityNotFoundException
+    public PatrolShiftsImpl(LogWrapper log, int margin) throws EntityNotFoundException, SMSNotConfiguredException
     {
         this.log = log;
         this.margin = margin;

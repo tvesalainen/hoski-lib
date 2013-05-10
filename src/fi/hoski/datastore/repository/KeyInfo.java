@@ -172,7 +172,8 @@ public class KeyInfo
                     format = repositoryBundle.getString("RaceFleetOpen");
                 }
             }
-            label = String.format(format, fleet, eventDate, closingDate, time);
+            int numberOfRaceEntries = races.getNumberOfRaceEntriesFor(raceFleet);
+            label = String.format(format, fleet, eventDate, closingDate, time, numberOfRaceEntries);
             String page = (String) raceSeries.get(RaceSeries.PAGE);
             if (page == null)
             {

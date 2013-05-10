@@ -69,13 +69,24 @@ public class DSUtilsImpl implements DSUtils
     }
 
     @Override
-    public List<Entity> getChilds(Key parent)
+    public List<Entity> getChilds(Key parent, String... kinds)
     {
-        return getChilds(parent, null);
+        if (kinds.length == 0)
+        {
+            return getChildsForKind(parent, null);
+        }
+        else
+        {
+            List<Entity> list = new ArrayList<>();
+            for (String kind : kinds)
+            {
+                list.addAll(getChildsForKind(parent, kind));
+            }
+            return list;
+        }
     }
-    
-    @Override
-    public List<Entity> getChilds(Key parent, String kind)
+
+    private List<Entity> getChildsForKind(Key parent, String kind)
     {
         Query query = new Query(kind);
         query.setAncestor(parent);
@@ -403,14 +414,26 @@ public class DSUtilsImpl implements DSUtils
     }
 
     @Override
-    public void deleteWithChilds(DataObject dataObject)
+    public void deleteWithChilds(DataObject dataObject, String... kinds)
     {
         Key key = dataObject.getEntity().getKey();
-        datastore.delete(key);
-        List<Entity> childs = getChilds(key);
-        for (Entity e : childs)
+        Transaction tr = datastore.beginTransaction();
+        try
         {
-            datastore.delete(e.getKey());
+            datastore.delete(key);
+            List<Entity> childs = getChilds(key, kinds);
+            for (Entity e : childs)
+            {
+                datastore.delete(e.getKey());
+            }
+            tr.commit();
+        }
+        finally
+        {
+            if (tr.isActive())
+            {
+                tr.rollback();
+            }
         }
     }
 
