@@ -34,6 +34,7 @@ public class Attachment extends DataObject implements Comparable<Attachment>
     public static final String TYPE = "Type";
     public static final String TITLE = "Title";
     public static final String URL = "URL";
+    public static final String Filename = "Filename";
 
     public static final DataObjectModel MODEL = new DataObjectModel(KIND);
     static
@@ -41,6 +42,7 @@ public class Attachment extends DataObject implements Comparable<Attachment>
         MODEL.property(TYPE, Long.class, true, true);
         MODEL.property(TITLE, String.class, false, false, "");
         MODEL.property(URL, Link.class);
+        MODEL.property(Filename);
     }
 
     public Attachment(DataObject parent)
