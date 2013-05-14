@@ -66,16 +66,6 @@ public class KeyInfo
         this.parameters = parameters;
         this.key = key;
         this.authenticated = authenticated;
-        init(key);
-    }
-
-    private void init(Key key) throws EntityNotFoundException
-    {
-        Key prnt = key.getParent();
-        if (prnt != null)
-        {
-            init(prnt);
-        }
         label = key.toString(); // safe values
         menuLink = label;
         editLink = label;
