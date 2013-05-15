@@ -112,8 +112,13 @@ public class KeyInfo
             {
                 format = repositoryBundle.getString("RaceSeriesOpen");
             }
-            int numberOfRaceEntries = races.getNumberOfRaceEntriesFor(raceSeries);
-            int daysTo = getDaysTo(eventDate);
+            String numberOfRaceEntries = "";
+            int count = races.getNumberOfRaceEntriesFor(raceSeries);
+            if (count > 0)
+            {
+                numberOfRaceEntries = "("+count+")";
+            }
+            String daysTo = getDaysTo(eventDate);
             label = String.format(format, event, eventDateString, closingDate, numberOfRaceEntries, daysTo);
         }
         if (Repository.RACEFLEET.equals(key.getKind()))
@@ -164,7 +169,12 @@ public class KeyInfo
                     format = repositoryBundle.getString("RaceFleetOpen");
                 }
             }
-            int numberOfRaceEntries = races.getNumberOfRaceEntriesFor(raceFleet);
+            String numberOfRaceEntries = "";
+            int count = races.getNumberOfRaceEntriesFor(raceFleet);
+            if (count > 0)
+            {
+                numberOfRaceEntries = "("+count+")";
+            }
             label = String.format(format, fleet, eventDate, closingDate, time, numberOfRaceEntries);
             String page = (String) raceSeries.get(RaceSeries.PAGE);
             if (page == null)
@@ -282,8 +292,13 @@ public class KeyInfo
             {
                 format = repositoryBundle.getString("RaceSeriesOpen");
             }
-            int numberOfRaceEntries = races.getNumberOfRaceEntriesFor(raceSeries);
-            int daysTo = getDaysTo(eventDate);
+            String numberOfRaceEntries = "";
+            int count = races.getNumberOfRaceEntriesFor(raceSeries);
+            if (count > 0)
+            {
+                numberOfRaceEntries = "("+count+")";
+            }
+            String daysTo = getDaysTo(eventDate);
             lab = String.format(format, event, eventDateString, closingDate, numberOfRaceEntries, daysTo);
             //map.put(prefix+"RaceEvent", event);
             map.put(prefix + "RaceEventFrom", eventDate.toString());
@@ -353,7 +368,12 @@ public class KeyInfo
                     format = repositoryBundle.getString("RaceFleetOpen");
                 }
             }
-            int numberOfRaceEntries = races.getNumberOfRaceEntriesFor(raceFleet);
+            String numberOfRaceEntries = "";
+            int count = races.getNumberOfRaceEntriesFor(raceFleet);
+            if (count > 0)
+            {
+                numberOfRaceEntries = "("+count+")";
+            }
             lab = String.format(format, fleet, eventDate, closingDate, time, numberOfRaceEntries);
             String ratingSystem = (String) raceFleet.get(RaceFleet.RatingSystem);
             map.put(prefix + "RaceFleet", lab);
@@ -483,16 +503,16 @@ public class KeyInfo
         return menuLink;
     }
 
-    private int getDaysTo(Day eventDate)
+    private String getDaysTo(Day eventDate)
     {
         Day now = new Day();
         if (eventDate.after(now))
         {
-            return (int) ((eventDate.getDate().getTime()-System.currentTimeMillis())/86400000);
+            return String.valueOf((int) ((eventDate.getDate().getTime()-System.currentTimeMillis())/86400000));
         }
         else
         {
-            return 0;
+            return "";
         }
     }
 }
