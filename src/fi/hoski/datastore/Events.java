@@ -73,5 +73,7 @@ public interface Events
     List<Reservation> getReservations(Event event);
 
     Event getEvent(String eventKey) throws EntityNotFoundException;
+    
+    void createMissingEventTypes();
 
 }

@@ -398,4 +398,15 @@ public class EventsImpl implements Events
         }
     }
 
+    @Override
+    public void createMissingEventTypes()
+    {
+        for (EventType et : EventType.values())
+        {
+            Key typeKey = Keys.getTypeKey(new Day(), et);
+            Entity e = new Entity(typeKey);
+            datastore.put(e);
+        }
+    }
+
 }
