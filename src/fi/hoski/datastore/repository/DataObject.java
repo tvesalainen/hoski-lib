@@ -449,9 +449,17 @@ public class DataObject implements Cloneable
 
     public String getFieldsAsHtmlTable()
     {
+        return getFieldsAsHtmlTable(model.propertyList);
+    }
+    public String getFieldsAsHtmlTable(String... properties)
+    {
+        return getFieldsAsHtmlTable(Arrays.asList(properties));
+    }
+    public String getFieldsAsHtmlTable(List<String> properties)
+    {
         StringBuilder sb = new StringBuilder();
         sb.append("<table class='" + getClass().getSimpleName() + "'>");
-        for (String property : model.propertyList)
+        for (String property : properties)
         {
             Object value = get(property);
             if (value != null)
