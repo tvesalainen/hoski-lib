@@ -54,7 +54,6 @@
   </target>
 
   <target name="dist" depends="build">
-    <delete file="dist/hoskilib.jar"/>
     <mkdir dir="dist"/>
     <jar destfile="dist/hoskilib.jar" basedir="build" />
   </target>
