@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>7</version>
+        <version>9</version>
     </parent>    
     <modelVersion>4.0.0</modelVersion>
     <groupId>fi.hoski</groupId>
@@ -28,10 +28,6 @@
     </scm>    
     <developers>
         <developer>
-            <name>Heikki Vesalainen</name>
-            <email>heikkivesalainen@gmail.com</email>
-        </developer>
-        <developer>
             <name>Timo Vesalainen</name>
             <email>timo.vesalainen@iki.fi</email>
             <url>https://github.com/tvesalainen</url>
@@ -43,7 +39,6 @@
         <version.gae>1.9.3</version.gae>	
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <github.global.server>github</github.global.server>
     </properties>
 
     <dependencies>
@@ -58,12 +53,6 @@
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-remote-api</artifactId>
             <version>${version.gae}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
