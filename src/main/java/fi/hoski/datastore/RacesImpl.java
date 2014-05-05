@@ -77,8 +77,8 @@ public class RacesImpl implements Races
         Transaction tr = datastore.beginTransaction();
         try
         {
-            entities.put(raceSeries);
             entities.deleteWithChilds(raceSeries, "RaceFleet");
+            entities.put(raceSeries);
             entities.put(classList);
             tr.commit();
         }
@@ -94,7 +94,19 @@ public class RacesImpl implements Races
     @Override
     public void removeRace(RaceSeries raceSeries)
     {
-        entities.deleteWithChilds(raceSeries, "RaceFleet");
+        Transaction tr = datastore.beginTransaction();
+        try
+        {
+            entities.deleteWithChilds(raceSeries, "RaceFleet");
+            tr.commit();
+        }
+        finally
+        {
+            if (tr.isActive())
+            {
+                tr.rollback();
+            }
+        }
     }
     
     @Override

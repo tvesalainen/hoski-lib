@@ -417,23 +417,11 @@ public class DSUtilsImpl implements DSUtils
     public void deleteWithChilds(DataObject dataObject, String... kinds)
     {
         Key key = dataObject.getEntity().getKey();
-        Transaction tr = datastore.beginTransaction();
-        try
+        datastore.delete(key);
+        List<Entity> childs = getChilds(key, kinds);
+        for (Entity e : childs)
         {
-            datastore.delete(key);
-            List<Entity> childs = getChilds(key, kinds);
-            for (Entity e : childs)
-            {
-                datastore.delete(e.getKey());
-            }
-            tr.commit();
-        }
-        finally
-        {
-            if (tr.isActive())
-            {
-                tr.rollback();
-            }
+            datastore.delete(e.getKey());
         }
     }
 
