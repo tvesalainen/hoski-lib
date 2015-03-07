@@ -16,7 +16,6 @@
 */
 package fi.hoski.datastore;
 
-import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
 import fi.hoski.datastore.repository.*;
@@ -50,4 +49,10 @@ public interface Races
     BankingBarcode getBarcode(RaceEntry raceEntry) throws EntityNotFoundException;
     
     RaceEntry raceEntryForReference(long reference) throws EntityNotFoundException;
+    /**
+     * Returns true if email belongs to race admin.
+     * @param email
+     * @return 
+     */
+    boolean isRaceAdmin(String email);
 }

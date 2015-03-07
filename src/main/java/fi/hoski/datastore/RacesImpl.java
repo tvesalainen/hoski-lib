@@ -13,12 +13,12 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package fi.hoski.datastore;
 
 import com.google.appengine.api.datastore.*;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import fi.hoski.datastore.repository.*;
-import fi.hoski.datastore.repository.Attachment;
 import fi.hoski.mail.MailService;
 import fi.hoski.mail.MailServiceImpl;
 import fi.hoski.util.BankingBarcode;
@@ -32,6 +32,7 @@ import java.util.List;
  */
 public class RacesImpl implements Races
 {
+
     private LogWrapper log;
     private DatastoreService datastore;
     private DSUtils entities;
@@ -108,7 +109,7 @@ public class RacesImpl implements Races
             }
         }
     }
-    
+
     @Override
     public List<RaceSeries> getRaces() throws EntityNotFoundException
     {
@@ -119,7 +120,7 @@ public class RacesImpl implements Races
         PreparedQuery prepared = datastore.prepare(query);
         for (Entity entity : prepared.asIterable())
         {
-            list.add((RaceSeries)entities.newInstance(entity));
+            list.add((RaceSeries) entities.newInstance(entity));
         }
         return list;
     }
@@ -133,7 +134,7 @@ public class RacesImpl implements Races
         PreparedQuery prepared = datastore.prepare(query);
         for (Entity entity : prepared.asIterable())
         {
-            list.add((RaceFleet)entities.newInstance(entity));
+            list.add((RaceFleet) entities.newInstance(entity));
         }
         return list;
     }
@@ -148,7 +149,7 @@ public class RacesImpl implements Races
         PreparedQuery prepared = datastore.prepare(query);
         for (Entity entity : prepared.asIterable())
         {
-            list.add((RaceEntry)entities.newInstance(entity));
+            list.add((RaceEntry) entities.newInstance(entity));
         }
         return list;
     }
@@ -176,7 +177,7 @@ public class RacesImpl implements Races
             Double fee = (Double) entity.getProperty(RaceEntry.FEE);
             if (fee != null && fee > 0.0)
             {
-                list.add((RaceEntry)entities.newInstance(entity));
+                list.add((RaceEntry) entities.newInstance(entity));
             }
         }
         return list;
@@ -205,12 +206,12 @@ public class RacesImpl implements Races
                 if (seriesRef == -1)
                 {
                     seriesRef = references.getNextReferenceFor(raceSeriesKey.getParent());
-                    log.log("seriesRef="+seriesRef+" "+raceSeriesKey);
+                    log.log("seriesRef=" + seriesRef + " " + raceSeriesKey);
                     references.addReferenceFor(raceSeriesKey, seriesRef);
                 }
                 if (seriesRef > 99)
                 {
-                    log.log("Warning: "+raceSeries.createKey()+" reference over 99");
+                    log.log("Warning: " + raceSeries.createKey() + " reference over 99");
                     return null;
                 }
                 log.log(raceEntry.createKey().toString());
@@ -219,11 +220,11 @@ public class RacesImpl implements Races
                 if (reference == -1)
                 {
                     long entryRef = references.getNextReferenceFor(raceSeriesKey);
-                    reference = seriesRef+100*entryRef;
+                    reference = seriesRef + 100 * entryRef;
                     references.addReferenceFor(raceEntryKey, reference);
                 }
                 tr.commit();
-                
+
                 Day date = (Day) raceFleet.get(RaceFleet.EventDate);
                 Day due = new Day();
                 String bankAccount = entities.getMessage(Messages.RACEBANKACCOUNT);
@@ -235,7 +236,7 @@ public class RacesImpl implements Races
                         String.valueOf(reference),
                         due.getDate(),
                         bic
-                        );
+                );
             }
             finally
             {
@@ -257,6 +258,17 @@ public class RacesImpl implements Races
     {
         Entity entity = references.getEntityFor(reference);
         return (RaceEntry) entities.newInstance(entity);
+    }
+
+    @Override
+    public boolean isRaceAdmin(String email)
+    {
+        Query query = new Query("RaceAdmins");
+        FilterPredicate filter = new FilterPredicate("Email", Query.FilterOperator.EQUAL, email);
+        query.setFilter(filter);
+        PreparedQuery prepared = datastore.prepare(query);
+        int count = prepared.countEntities(FetchOptions.Builder.withDefaults());
+        return count > 0;
     }
 
 }

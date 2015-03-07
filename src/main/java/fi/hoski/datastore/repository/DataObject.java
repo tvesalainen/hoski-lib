@@ -474,13 +474,13 @@ public class DataObject implements Cloneable
         return sb.toString();
     }
     /**
-     * Writes collection of DataObjects in cvs format. OutputStream is not closed
+     * Writes collection of DataObjects in csv format. OutputStream is not closed
      * after operation.
      * @param os
      * @param collection
      * @throws IOException 
      */
-    public static void writeCVS(DataObjectModel model, Collection<? extends DataObject> collection, OutputStream os) throws IOException
+    public static void writeCSV(DataObjectModel model, Collection<? extends DataObject> collection, OutputStream os) throws IOException
     {
         BufferedOutputStream bos = new BufferedOutputStream(os);
         OutputStreamWriter osw = new OutputStreamWriter(bos, "ISO-8859-1");
