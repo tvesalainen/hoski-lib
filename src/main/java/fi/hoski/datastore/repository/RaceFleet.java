@@ -105,9 +105,14 @@ public class RaceFleet extends DataObject implements Reservable
     @Override
     public Key createKey()
     {
+        return KeyFactory.createKey(parent.createKey(), Kind, getKeyName());
+    }
+    
+    public String getKeyName()
+    {
         String fleet = (String)get(Fleet);
         Day eventDate = (Day) get(EventDate);
-        return KeyFactory.createKey(parent.createKey(), Kind, fleet+eventDate.getValue());
+        return fleet+eventDate.getValue();
     }
 
     public RaceSeries getRaceSeries()
