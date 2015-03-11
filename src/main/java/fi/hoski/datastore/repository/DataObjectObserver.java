@@ -19,8 +19,9 @@ package fi.hoski.datastore.repository;
 /**
  *
  * @author Timo Vesalainen
+ * @param <T>
  */
-public interface DataObjectObserver
+public interface DataObjectObserver<T extends DataObject>
 {
-    void changed(DataObject dataObject, String property, Object oldValue, Object newValue);
+    void changed(T dataObject, String property, Object oldValue, Object newValue);
 }
