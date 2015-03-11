@@ -26,6 +26,7 @@ import fi.hoski.util.Day;
 import fi.hoski.util.LogWrapper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Timo Vesalainen
@@ -73,14 +74,29 @@ public class RacesImpl implements Races
     }
 
     @Override
-    public void putRace(RaceSeries raceSeries, List<RaceFleet> classList)
+    public void putRace(RaceSeries raceSeries, List<RaceFleet> classList, Map<String,String> fleetKeys)
     {
         Transaction tr = datastore.beginTransaction();
         try
         {
             entities.deleteWithChilds(raceSeries, "RaceFleet");
-            entities.put(raceSeries);
+            Entity rsEntity = entities.put(raceSeries);
             entities.put(classList);
+            if (fleetKeys != null)
+            {
+                for (String oldName : fleetKeys.keySet())
+                {
+                    Key oldFleetKey = KeyFactory.createKey(rsEntity.getKey(), RaceFleet.Kind, oldName);
+                    Key newFleetKey = KeyFactory.createKey(rsEntity.getKey(), RaceFleet.Kind, fleetKeys.get(oldName));
+                    for (Entity re : entities.getChilds(oldFleetKey, RaceEntry.KIND))
+                    {
+                        datastore.delete(re.getKey());
+                        Entity ne = new Entity(RaceEntry.KIND, newFleetKey);
+                        ne.setPropertiesFrom(re);
+                        datastore.put(ne);
+                    }
+                }
+            }
             tr.commit();
         }
         finally

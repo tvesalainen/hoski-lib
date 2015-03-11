@@ -21,6 +21,7 @@ import com.google.appengine.api.datastore.Key;
 import fi.hoski.datastore.repository.*;
 import fi.hoski.util.BankingBarcode;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -30,7 +31,7 @@ public interface Races
 {
     RaceSeries getExistingRace(RaceSeries raceSeries);
     
-    void putRace(RaceSeries raceSeries, List<RaceFleet> classList);
+    void putRace(RaceSeries raceSeries, List<RaceFleet> classList, Map<String,String> fleetKeys);
     
     void removeRace(RaceSeries raceSeries);
     
