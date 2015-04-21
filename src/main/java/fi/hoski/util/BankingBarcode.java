@@ -16,11 +16,7 @@
 */
 package fi.hoski.util;
 
-import fi.hoski.util.code128.CharNotInCodesetException;
-import fi.hoski.util.code128.Code128;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BankingBarcode
 {

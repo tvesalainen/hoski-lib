@@ -16,7 +16,6 @@
 */
 package fi.hoski.util;
 
-import java.math.BigInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -224,33 +223,6 @@ public class BankAccountNumber
                 return start + cb.length;
             default:
                 throw new IllegalArgumentException("wrong version "+version);
-        }
-    }
-
-    public static void main(String[] args)
-    {
-        try
-        {
-            BankAccountNumber ptn = new BankAccountNumber("FI4250001510000023");
-            if (!"50001510000023".equals(ptn.toBankingBarcodeString()))
-            {
-                System.err.println("error");
-            }
-            ptn = new BankAccountNumber("123456-785");
-            if (!"12345600000785".equals(ptn.toBankingBarcodeString()))
-            {
-                System.err.println("error");
-            }
-            ptn = new BankAccountNumber("423456-781");
-            if (!"42345670000081".equals(ptn.toBankingBarcodeString()))
-            {
-                System.err.println("error");
-            }
-            System.err.println(ptn.getIBAN());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace(System.err);
         }
     }
 
