@@ -312,7 +312,7 @@ public class EntityReferences
         }
     }
     /**
-     * Encodes String into HTML format. & -> &amp;
+     * Encodes String into HTML format. &amp; -&gt; &amp;
      * @param str
      * @return
      */
@@ -321,7 +321,7 @@ public class EntityReferences
         return encode(str, charset.name());
     }
     /**
-     * Encodes String into HTML format. & -> &amp;
+     * Encodes String into HTML format. &amp; -&gt; &amp;
      * @param str
      * @return
      */
@@ -344,7 +344,7 @@ public class EntityReferences
         }
     }
     /**
-     * Encodes String into HTML format. & -> &amp;
+     * Encodes String into HTML format. &amp; -&gt; &amp;
      * @param str
      * @return
      */
@@ -380,7 +380,7 @@ public class EntityReferences
     private static final Pattern ENT = Pattern.compile("&([a-zA-Z0-9#]+);");
     private static final Pattern HENT = Pattern.compile("#([0-9]+)");
     /**
-     * Decodes String from HTML format. &amp; -> &
+     * Decodes String from HTML format. &amp; -&gt; &amp;
      * @param str
      * @return
      */

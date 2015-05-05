@@ -17,11 +17,7 @@
 
 package fi.hoski.datastore.repository;
 
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import fi.hoski.util.ConvertUtil;
-import fi.hoski.util.Day;
-import fi.hoski.util.Time;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -182,7 +178,7 @@ public class DataObjectModel implements Cloneable
     }
     /**
      * Returns a clone of this model where only listed propertyList are present.
-     * @param propertyList
+     * @param properties
      * @return 
      */
     public DataObjectModel view(String... properties)
@@ -227,7 +223,7 @@ public class DataObjectModel implements Cloneable
     }
     /**
      * Returns a clone of model where listed propertyList are hidden;
-     * @param propertyList
+     * @param properties
      * @return 
      */
     public DataObjectModel hide(String... properties)

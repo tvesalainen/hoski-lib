@@ -84,12 +84,12 @@ public interface Repository
      * same name.
      */
     /**
-     * Object is Options<String> where labels are boat names while items are
+     * Object is Options&lt;String&gt; where labels are boat names while items are
      * keys of Veneet encoded to String
      */
     public static final String BOAT_SELECTION = "BoatSelection";
     /**
-     * Object is Options<String> where labels are boat names while items are
+     * Object is Options&lt;String&gt; where labels are boat names while items are
      * keys of Veneet encoded to String
      */
     public static final String PATROL_SHIFT_SELECTION = "PatrolShiftSelection";

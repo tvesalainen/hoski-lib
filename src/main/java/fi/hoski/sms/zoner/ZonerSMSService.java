@@ -17,9 +17,6 @@
 package fi.hoski.sms.zoner;
 
 import com.google.appengine.api.datastore.*;
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import fi.hoski.datastore.Repository;
 import fi.hoski.datastore.SMSNotConfiguredException;
 import fi.hoski.datastore.repository.Keys;
@@ -41,12 +38,10 @@ import java.nio.charset.CoderResult;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Timo Vesalainen
- * @see https://sms.zoner.fi/pdf/http_api.pdf
+ * @see <a href="https://sms.zoner.fi/pdf/http_api.pdf">HTTP API</a>
  */
 public class ZonerSMSService implements SMSService
 {
