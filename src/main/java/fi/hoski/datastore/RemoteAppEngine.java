@@ -21,25 +21,23 @@ import com.google.appengine.tools.remoteapi.RemoteApiInstaller;
 import com.google.appengine.tools.remoteapi.RemoteApiOptions;
 import java.io.IOException;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
+ * A helper class to make remote connection to app engine.
+ * 
+ * <p>Implement run method for app engine code. 
+ * 
  * @author Timo Vesalainen
+ * @param <T>
  */
 public abstract class RemoteAppEngine<T>
 {
-    private static String username;
     private static RemoteApiOptions options;
 
-    public static void init(String server, String user, String password)
+    public static void init(String server)
     {
-        username = user;
         options = new RemoteApiOptions();
         options.server(server, 443);
-        options.credentials(user, password);
+        options.useApplicationDefaultCredential();
     }
     
     public T call() throws IOException
@@ -49,9 +47,7 @@ public abstract class RemoteAppEngine<T>
         installer.install(options);
         try
         {
-            T t = run();
-            options.reuseCredentials(username, installer.serializeCredentials());
-            return t;
+            return run();
         }
         finally
         {
