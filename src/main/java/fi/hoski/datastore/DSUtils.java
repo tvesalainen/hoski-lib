@@ -102,4 +102,6 @@ public interface DSUtils
     List<Attachment> getAttachmentsFor(Key parent);
     
     List<Title> getTitles() throws EntityNotFoundException;
+    
+    DataObject getParent(Key key, String kind) throws EntityNotFoundException;
 }

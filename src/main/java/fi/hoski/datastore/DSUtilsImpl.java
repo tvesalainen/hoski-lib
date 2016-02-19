@@ -27,8 +27,6 @@ import fi.hoski.util.FormPoster;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Timo Vesalainen
@@ -716,6 +714,23 @@ public class DSUtilsImpl implements DSUtils
             list.add((Title)newInstance(entity));
         }
         return list;
+    }
+
+    @Override
+    public DataObject getParent(Key key, String kind) throws EntityNotFoundException
+    {
+        while (!kind.equals(key.getKind()))
+        {
+            key = key.getParent();
+        }
+        if (key != null)
+        {
+            return newInstance(key);
+        }
+        else
+        {
+            return null;
+        }
     }
 
 }
