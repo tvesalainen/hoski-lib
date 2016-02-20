@@ -21,6 +21,7 @@ import au.com.bytecode.opencsv.CSVWriter;
 import fi.hoski.datastore.repository.RaceEntry;
 import fi.hoski.datastore.repository.RaceFleet;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -351,7 +352,7 @@ public class SailWaveFile implements Serializable
     public void write(OutputStream os) throws IOException
     {
         BufferedOutputStream bos = new BufferedOutputStream(os);
-        OutputStreamWriter osw = new OutputStreamWriter(bos, "ISO-8859-1");
+        OutputStreamWriter osw = new OutputStreamWriter(bos, StandardCharsets.ISO_8859_1);
         CSVWriter writer = new CSVWriter(osw, ',', '"', "\r\n");
         writer.writeAll(list);
         for (Fleet fleet : fleets.values())
