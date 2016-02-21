@@ -19,6 +19,7 @@ package fi.hoski.datastore.repository;
 
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Link;
 import fi.hoski.util.EntityReferences;
 
@@ -73,7 +74,7 @@ public class Attachment extends DataObject implements Comparable<Attachment>
     {
         String title = (String) get(TITLE);
         Link link = (Link) get(URL);
-        return "<a href='"+link.getValue()+"'>"+EntityReferences.encode(title)+"</a>";
+        return "<a href=\"/download?attachment-key="+KeyFactory.keyToString(data.getEntity().getKey())+"\">"+title+"</a>";
     }
     @Override
     public int compareTo(Attachment o)

@@ -78,7 +78,7 @@ public class KeyInfo
             Entity attachment = entities.get(key);
             label = (String) attachment.getProperty(Attachment.TITLE);
             Link link = (Link) attachment.getProperty(Attachment.URL);
-            menuLink = "<a href=\""+link.getValue()+"\">"+label+"</a>";
+            menuLink = "<a href=\"/download?attachment-key="+KeyFactory.keyToString(key)+"\">"+label+"</a>";
             editLink = menuLink;
         }
         if (Repository.RACESERIES.equals(key.getKind()))
