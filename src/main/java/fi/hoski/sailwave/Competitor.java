@@ -30,10 +30,6 @@ public class Competitor extends Base
     {
         set("comphigh", "0", null, "");
         set("compexclude","0",null,"");
-        set("rdisc","0",null,"4");
-        set("rrestyp","0",null,"4");
-        set("srat","0",null,"4");
-        set("rrset","0",null,"4");
     }
     
     public void setAll(Map<String,Object> map)
