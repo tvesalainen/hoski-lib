@@ -44,7 +44,7 @@ public interface PatrolShifts
     
     boolean swapShift(SwapRequest req) throws EntityNotFoundException, IOException, SMSException, AddressException;
     
-    boolean swapShift(Map<String, Object> user, String shift, String... excl) throws EntityNotFoundException, IOException, SMSException, AddressException;
+    boolean swapShift(Map<String, Object> user, String shift, String... excl) throws EntityNotFoundException, IOException, SMSException, AddressException, TooLateException;
     
     void removeSwapShift(Map<String, Object> user, String shift) throws EntityNotFoundException, IOException;
     

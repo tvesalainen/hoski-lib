@@ -116,14 +116,21 @@ public class PatrolShiftsImpl implements PatrolShifts
         return swapLog;
     }
     @Override
-    public boolean swapShift(Map<String, Object> user, String shift, String... excl) throws EntityNotFoundException, IOException, SMSException, AddressException
+    public boolean swapShift(Map<String, Object> user, String shift, String... excl) throws EntityNotFoundException, IOException, SMSException, AddressException, TooLateException
     {
         Key shiftKey = KeyFactory.stringToKey(shift);
         Entity shiftEntity = datastore.get(shiftKey);
+        Day day = Day.getDay(shiftEntity.getProperty(Repository.PAIVA));
+        Day limit = new Day();
+        limit.addDays(margin+1);
+        if (limit.after(day))
+        {
+            throw new TooLateException("too late");
+        }
         SwapRequest activeSwapRequest = new SwapRequest();
         activeSwapRequest.set(Repository.JASENNO, user.get(Repository.JASENET+Repository.KEYSUFFIX));
         activeSwapRequest.set(Repository.VUOROID, shiftKey);
-        activeSwapRequest.set(Repository.PAIVA, Day.getDay(shiftEntity.getProperty(Repository.PAIVA)));
+        activeSwapRequest.set(Repository.PAIVA, day);
         List<Long> excluded = new ArrayList<Long>();
         excluded.add((Long)shiftEntity.getProperty(Repository.PAIVA));
         if (excl != null)
