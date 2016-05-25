@@ -72,7 +72,7 @@ public class PatrolShiftsImpl implements PatrolShifts
     public Options<String> getShiftOptions(String memberKeyString)
     {
         List<PatrolShift> patrolShifts = getShifts(KeyFactory.stringToKey(memberKeyString));
-        Options<String> allShifts = new Options<String>();
+        Options<String> allShifts = new Options<>();
         if (!patrolShifts.isEmpty())
         {
             allShifts.setSelection((patrolShifts.get(0).createKeyString()));
@@ -88,7 +88,7 @@ public class PatrolShiftsImpl implements PatrolShifts
     @Override
     public List<PatrolShift> getShifts(Key memberKey)
     {
-        List<PatrolShift> list = new ArrayList<PatrolShift>();
+        List<PatrolShift> list = new ArrayList<>();
         Query query = new Query(Repository.VARTIOVUOROTIEDOT);
         query.addFilter(Repository.JASENNO, Query.FilterOperator.EQUAL, memberKey);
         query.addFilter(Repository.PAIVA, Query.FilterOperator.GREATER_THAN_OR_EQUAL, new Day().getValue());
@@ -123,6 +123,7 @@ public class PatrolShiftsImpl implements PatrolShifts
         Day day = Day.getDay(shiftEntity.getProperty(Repository.PAIVA));
         Day limit = new Day();
         limit.addDays(margin+1);
+        boolean b = limit.after(day);
         if (limit.after(day))
         {
             throw new TooLateException("too late");
@@ -131,7 +132,7 @@ public class PatrolShiftsImpl implements PatrolShifts
         activeSwapRequest.set(Repository.JASENNO, user.get(Repository.JASENET+Repository.KEYSUFFIX));
         activeSwapRequest.set(Repository.VUOROID, shiftKey);
         activeSwapRequest.set(Repository.PAIVA, day);
-        List<Long> excluded = new ArrayList<Long>();
+        List<Long> excluded = new ArrayList<>();
         excluded.add((Long)shiftEntity.getProperty(Repository.PAIVA));
         if (excl != null)
         {
@@ -165,6 +166,7 @@ public class PatrolShiftsImpl implements PatrolShifts
         Query query = new Query(SwapRequest.KIND);
         query.addFilter(Repository.PAIVA, Query.FilterOperator.GREATER_THAN, now.getValue());
         query.addSort(Repository.PAIVA);
+        log.log(query.toString());
         PreparedQuery prepared = datastore.prepare(query);
         for (Entity swapCandidateEntity : prepared.asIterable())
         {
